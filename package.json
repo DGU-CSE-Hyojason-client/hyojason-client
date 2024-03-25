@@ -1,0 +1,11 @@
+{
+  "name": "hyojason_client",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "install": "cd web && yarn install",
+    "web_dev": "cd web && yarn dev",
+    "app_dev": "cd native && yarn start"
+  }
+}
