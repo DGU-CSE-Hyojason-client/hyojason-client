@@ -1,10 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
+import { ChatPage } from "./pages/ChatPage";
+import { Layout } from "./pages/layout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: <Layout />,
+    children: [{ index: true, element: <HomePage /> }],
+  },
+  {
+    path: "/chat",
+    element: <Layout />,
+    children: [{ index: true, element: <ChatPage /> }],
   },
 ]);
 
