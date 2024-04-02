@@ -2,18 +2,36 @@ import { createBrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { ChatPage } from "./pages/ChatPage";
 import { Layout } from "./pages/Layout";
+import { MatchingPage } from "./pages/MatchingPage";
+import { AccountWrapper } from "./AccountWrapper";
+
+const route = [
+  { name: "home", path: "/" },
+  { name: "matching", path: "/matching" },
+  { name: "chat", path: "/chat" },
+];
 
 const router = createBrowserRouter([
   {
+    // 인증필요
     path: "/",
-    element: <Layout />,
-    children: [{ index: true, element: <HomePage /> }],
-  },
-  {
-    path: "/chat",
-    element: <Layout />,
-    children: [{ index: true, element: <ChatPage /> }],
+    element: (
+      <AccountWrapper>
+        <Layout />
+      </AccountWrapper>
+    ),
+    children: [
+      { index: true, element: <HomePage /> },
+      {
+        path: "matching",
+        element: <MatchingPage />,
+      },
+      {
+        path: "/chat",
+        element: <ChatPage />,
+      },
+    ],
   },
 ]);
 
-export { router };
+export { router, route };
