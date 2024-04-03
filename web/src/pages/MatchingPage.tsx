@@ -16,7 +16,6 @@ export function MatchingPage() {
     if (!gid) {
       return;
     }
-    console.log("send");
     fetchMatch(gid).then((data) => setUsers(data["users"]));
   }, [gid]);
 
