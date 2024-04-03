@@ -10,7 +10,6 @@ export function AccountWrapper({ children }: { children: React.ReactNode }) {
   );
 
   useEffect(() => {
-    console.log("set");
     setAccount({ id: "hyojason2024", name: "효자손" });
   }, [setAccount]);
 

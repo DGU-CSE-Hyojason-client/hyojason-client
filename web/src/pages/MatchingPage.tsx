@@ -7,6 +7,7 @@ export function MatchingPage() {
 
   const [id, setId] = useState(account?.id || "");
   const [name, setName] = useState(account?.name || "");
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     if (!account?.id || !account?.name) {
@@ -17,7 +18,7 @@ export function MatchingPage() {
   }, [account]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col p-2">
       <input
         value={id}
         onChange={(e) => setId(e.target.value)}
@@ -28,17 +29,27 @@ export function MatchingPage() {
         onChange={(e) => setName(e.target.value)}
         placeholder="name"
       />
-      <span>account</span>
-      <span>id: {id || "None"}</span>
-      <span>name: {name || "None"}</span>
 
       <button
-        onClick={() => {
-          console.log({ id, name });
+        className="w-20 bg-slate-300 rounded-md p-1 pr-2"
+        onClick={async () => {
+          const res = await fetch("/match/123", {
+            method: "post",
+            body: JSON.stringify({ id, name }),
+          });
+
+          const data = await res.json();
+          setUsers(data.users || []);
         }}
       >
         match!
       </button>
+
+      {users.map(({ id, name }, i) => (
+        <div key={`${id}-${i}`}>
+          {id}, {name}
+        </div>
+      ))}
     </div>
   );
 }
