@@ -1,21 +1,14 @@
 import { HttpResponse, http } from "msw";
 import { token } from "../config";
 
-interface PostMatcingParams {
-  gid: string;
-}
-
-interface PostMatchingReqBody {
-  id: string;
-  name: string;
-}
-
 type User = { id: string; name: string };
 
 interface Match {
   maxUserSize: number;
   users: User[];
 }
+
+const defaultMaxUserSize = 5;
 
 export class MockMatchingQueue {
   queue: Map<string, Match>;
@@ -31,18 +24,18 @@ export class MockMatchingQueue {
     if (match) {
       match.users.push(user);
     } else {
-      this.queue.set(gid, { maxUserSize: 5, users: [user] });
+      this.queue.set(gid, { maxUserSize: defaultMaxUserSize, users: [user] });
     }
 
     await this.dispatch();
   }
 
   users(gid: string) {
-    return this.queue.get(gid)?.users;
+    return this.queue.get(gid)?.users || [];
   }
 
   maxUserSize(gid: string) {
-    return this.queue.get(gid)?.maxUserSize;
+    return this.queue.get(gid)?.maxUserSize || defaultMaxUserSize;
   }
 
   async dispatch() {
@@ -57,7 +50,18 @@ export class MockMatchingQueue {
 
 const matchingQueue = new MockMatchingQueue(token);
 
-const postMatch = http.post<PostMatcingParams, PostMatchingReqBody>(
+const getMatch = http.get<{ gid: string }>(
+  "/match/:gid",
+  async ({ params }) => {
+    const { gid } = params;
+    const users = matchingQueue.users(gid);
+    const maxUserSize = matchingQueue.maxUserSize(gid);
+
+    return HttpResponse.json({ gid, users, maxUserSize }, { status: 200 });
+  }
+);
+
+const postMatch = http.post<{ gid: string }, { id: string; name: string }>(
   "/match/:gid",
   async ({ params, request }) => {
     const { gid } = params;
@@ -102,4 +106,4 @@ async function sendPushNotification(
 
 export { sendPushNotification };
 
-export default postMatch;
+export { getMatch, postMatch };

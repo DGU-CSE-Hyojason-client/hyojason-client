@@ -1,3 +1,3 @@
-import postMatch from "./match";
+import { getMatch, postMatch } from "./match";
 
-export const handlers = [postMatch];
+export const handlers = [getMatch, postMatch];
