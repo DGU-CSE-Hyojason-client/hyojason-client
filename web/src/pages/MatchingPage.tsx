@@ -8,6 +8,7 @@ export function MatchingPage() {
   const [id, setId] = useState(account?.id || "");
   const [name, setName] = useState(account?.name || "");
   const [users, setUsers] = useState([]);
+  const [maxUser, setMaxUser] = useState(undefined);
 
   useEffect(() => {
     if (!account?.id || !account?.name) {
@@ -40,16 +41,25 @@ export function MatchingPage() {
 
           const data = await res.json();
           setUsers(data.users || []);
+          setMaxUser(data.maxUserSize);
         }}
       >
         match!
       </button>
 
-      {users.map(({ id, name }, i) => (
-        <div key={`${id}-${i}`}>
-          {id}, {name}
+      {maxUser && (
+        <div>
+          {users.length}/{maxUser}
         </div>
-      ))}
+      )}
+
+      <ul>
+        {users.map(({ id, name }, i) => (
+          <li key={`${id}-${i}`}>
+            {id}, {name}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

@@ -30,7 +30,6 @@ export class MockMatchingQueue {
     const match = this.queue.get(gid);
     if (match) {
       match.users.push(user);
-      //   this.queue.set(gid, users);
     } else {
       this.queue.set(gid, { maxUserSize: 5, users: [user] });
     }
@@ -40,6 +39,10 @@ export class MockMatchingQueue {
 
   users(gid: string) {
     return this.queue.get(gid)?.users;
+  }
+
+  maxUserSize(gid: string) {
+    return this.queue.get(gid)?.maxUserSize;
   }
 
   async dispatch() {
@@ -63,8 +66,12 @@ const postMatch = http.post<PostMatcingParams, PostMatchingReqBody>(
 
     await matchingQueue.add(gid, user);
     const users = matchingQueue.users(gid);
+    const maxUserSize = matchingQueue.maxUserSize(gid);
 
-    return HttpResponse.json({ gid, id, name, users }, { status: 200 });
+    return HttpResponse.json(
+      { gid, id, name, users, maxUserSize },
+      { status: 200 }
+    );
   }
 );
 
