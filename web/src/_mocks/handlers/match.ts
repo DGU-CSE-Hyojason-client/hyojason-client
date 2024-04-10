@@ -1,76 +1,72 @@
 import { HttpResponse, http } from "msw";
 import { token } from "../config";
 import initialQueue from "../initialQueue.json";
+import initialMatch from "../initialMatch.json";
 import { Match, User } from "../../types";
+import { TOKEN_KEY } from "../../const";
+import { mockAccounts } from "./account";
 
-const defaultMaxUserSize = 5;
+const Matched: { [gid: string]: Match } = initialMatch;
 
 export class MockMatchingQueue {
-  queue: Map<string, Match>;
+  queue: User[];
   token: string;
 
   constructor(token: string) {
-    this.queue = new Map(Object.entries(initialQueue));
+    this.queue = initialQueue;
     this.token = token;
   }
 
-  async add(gid: string, user: User) {
-    const match = this.queue.get(gid);
-    if (match) {
-      match.users.push(user);
-    } else {
-      this.queue.set(gid, { maxUserSize: defaultMaxUserSize, users: [user] });
-    }
-
-    await this.dispatch();
+  async add(user: User) {
+    this.queue.push(user);
   }
 
-  users(gid: string) {
-    return this.queue.get(gid)?.users || [];
+  users() {
+    return this.queue;
   }
 
-  maxUserSize(gid: string) {
-    return this.queue.get(gid)?.maxUserSize || defaultMaxUserSize;
-  }
-
-  async dispatch() {
-    for (const [gid, match] of this.queue.entries()) {
-      if (match.users.length >= match.maxUserSize) {
-        console.log(`${gid} 매칭이 완료되었습니다,`);
-        // await sendPushNotification(this.token, "");
-      }
-    }
-  }
+  async match() {}
 }
 
 const matchingQueue = new MockMatchingQueue(token);
 
-const getMatch = http.get<{ gid: string }>(
-  "/match/:gid",
-  async ({ params }) => {
-    const { gid } = params;
-    const users = matchingQueue.users(gid);
-    const maxUserSize = matchingQueue.maxUserSize(gid);
+const getMatch = http.get("/match", async ({ cookies }) => {
+  const token = cookies[TOKEN_KEY];
+  const account = mockAccounts.find((a) => a.token === token);
 
-    return HttpResponse.json({ gid, users, maxUserSize }, { status: 200 });
+  if (!account) {
+    return HttpResponse.json({}, { status: 403 });
   }
-);
 
-const postMatch = http.post<{ gid: string }, { id: string; name: string }>(
-  "/match/:gid",
-  async ({ params, request }) => {
-    const { gid } = params;
+  if (account.role === "elder") {
+    const matched = Object.entries(Matched);
+    for (const [gid, { users }] of matched) {
+      if (users.find((u) => u.id === account.id)) {
+        return HttpResponse.json({ status: "matched", gid }, { status: 200 });
+      }
+    }
+
+    const users = matchingQueue.users();
+    const found = users.find((user) => user.id === account.id);
+
+    if (found) {
+      return HttpResponse.json({ status: "matching" }, { status: 200 });
+    }
+
+    return HttpResponse.json({ status: "idle" }, { status: 200 });
+  } else {
+    const users = matchingQueue.users();
+    return HttpResponse.json({ users }, { status: 200 });
+  }
+});
+
+const postMatch = http.post<object, { id: string; name: string }>(
+  "/match",
+  async ({ request }) => {
     const user = await request.json();
-    const { id, name } = user;
+    await matchingQueue.add(user);
 
-    await matchingQueue.add(gid, user);
-    const users = matchingQueue.users(gid);
-    const maxUserSize = matchingQueue.maxUserSize(gid);
-
-    return HttpResponse.json(
-      { gid, id, name, users, maxUserSize },
-      { status: 200 }
-    );
+    return HttpResponse.json({ status: 200 });
   }
 );
 

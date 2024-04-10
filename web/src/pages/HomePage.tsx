@@ -1,27 +1,31 @@
 import { useEffect } from "react";
 import apeach from "../assets/imgs/apeach.jpg";
 import useAccount from "../hooks/useAccount";
+import { login, me } from "../apis/account";
 
 export function HomePage() {
-  const { id, name, role, setId, setName, setRole, setAccount } = useAccount();
+  const { account, id, name, role, setRole, setAccount } = useAccount();
 
   useEffect(() => {
+    if (!account) {
+      return;
+    }
+
+    if (account.role === role) {
+      return;
+    }
+
     setAccount({ id, name, role });
-  }, [id, name, role, setAccount]);
+
+    login({ id, name, role }).then(async () => {
+      const data = await me();
+      console.log(data);
+    });
+  }, [account, id, name, role, setAccount]);
 
   return (
     <div>
       <div className="flex flex-col p-2">
-        <input
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-          placeholder="id"
-        />
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="name"
-        />
         <select
           className="w-24"
           value={role}

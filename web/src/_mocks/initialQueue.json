@@ -1,87 +1,71 @@
-{
-  "1": {
-    "maxUserSize": 5,
-    "users": [
-      {
-        "id": "elder1",
-        "name": "노인1"
-      },
-      {
-        "id": "elder2",
-        "name": "노인2"
-      },
-      {
-        "id": "elder3",
-        "name": "노인3"
-      },
-      {
-        "id": "elder4",
-        "name": "노인4"
-      }
-    ]
+[
+  {
+    "id": "elder16",
+    "name": "노인16"
   },
-  "2": {
-    "maxUserSize": 5,
-    "users": [
-      {
-        "id": "elder5",
-        "name": "노인5"
-      },
-      {
-        "id": "elder6",
-        "name": "노인6"
-      },
-      {
-        "id": "elder7",
-        "name": "노인7"
-      }
-    ]
+  {
+    "id": "elder17",
+    "name": "노인17"
   },
-  "3": {
-    "maxUserSize": 5,
-    "users": [
-      {
-        "id": "elder8",
-        "name": "노인8"
-      }
-    ]
+  {
+    "id": "elder18",
+    "name": "노인18"
   },
-  "4": {
-    "maxUserSize": 5,
-    "users": [
-      {
-        "id": "elder9",
-        "name": "노인9"
-      },
-      {
-        "id": "elder10",
-        "name": "노인10"
-      }
-    ]
+  {
+    "id": "elder19",
+    "name": "노인19"
   },
-  "5": {
-    "maxUserSize": 5,
-    "users": [
-      {
-        "id": "elder11",
-        "name": "노인11"
-      },
-      {
-        "id": "elder12",
-        "name": "노인12"
-      },
-      {
-        "id": "elder13",
-        "name": "노인13"
-      },
-      {
-        "id": "elder14",
-        "name": "노인14"
-      },
-      {
-        "id": "elder15",
-        "name": "노인15"
-      }
-    ]
+  {
+    "id": "elder20",
+    "name": "노인20"
+  },
+  {
+    "id": "elder21",
+    "name": "노인21"
+  },
+  {
+    "id": "elder22",
+    "name": "노인23"
+  },
+  {
+    "id": "elder24",
+    "name": "노인24"
+  },
+
+  {
+    "id": "elder25",
+    "name": "노인25"
+  },
+  {
+    "id": "elder26",
+    "name": "노인26"
+  },
+  {
+    "id": "elder27",
+    "name": "노인27"
+  },
+  {
+    "id": "elder28",
+    "name": "노인28"
+  },
+  {
+    "id": "elder29",
+    "name": "노인29"
+  },
+  {
+    "id": "elder30",
+    "name": "노인30"
+  },
+  {
+    "id": "elder31",
+    "name": "노인31"
+  },
+  {
+    "id": "elder32",
+    "name": "노인32"
+  },
+  {
+    "id": "elder17",
+    "name": "노인17"
   }
-}
+]
