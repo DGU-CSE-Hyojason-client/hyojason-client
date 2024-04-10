@@ -1,9 +1,5 @@
 import { create } from "zustand";
-
-type Account = {
-  id: string;
-  name: string;
-};
+import { Account } from "../types";
 
 interface AccountStore {
   account?: Account;

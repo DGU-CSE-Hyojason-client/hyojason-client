@@ -9,6 +9,7 @@ export default function useAccount() {
 
   const [id, setId] = useState(account?.id || "");
   const [name, setName] = useState(account?.name || "");
+  const [role, setRole] = useState(account?.role || "elder");
 
   useEffect(() => {
     if (!account?.id || !account?.name) {
@@ -19,5 +20,5 @@ export default function useAccount() {
     setName(account?.name);
   }, [account]);
 
-  return { id, name, setId, setName, account, setAccount };
+  return { id, name, role, setId, setName, setRole, account, setAccount };
 }

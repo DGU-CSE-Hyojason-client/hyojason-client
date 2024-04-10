@@ -1,12 +1,7 @@
 import { HttpResponse, http } from "msw";
 import { token } from "../config";
-
-type User = { id: string; name: string };
-
-interface Match {
-  maxUserSize: number;
-  users: User[];
-}
+import initialQueue from "../initialQueue.json";
+import { Match, User } from "../../types";
 
 const defaultMaxUserSize = 5;
 
@@ -15,7 +10,7 @@ export class MockMatchingQueue {
   token: string;
 
   constructor(token: string) {
-    this.queue = new Map();
+    this.queue = new Map(Object.entries(initialQueue));
     this.token = token;
   }
 
@@ -42,7 +37,7 @@ export class MockMatchingQueue {
     for (const [gid, match] of this.queue.entries()) {
       if (match.users.length >= match.maxUserSize) {
         console.log(`${gid} 매칭이 완료되었습니다,`);
-        await sendPushNotification(this.token, "");
+        // await sendPushNotification(this.token, "");
       }
     }
   }

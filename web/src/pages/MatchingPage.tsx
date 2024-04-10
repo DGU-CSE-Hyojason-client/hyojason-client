@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import useAccount from "../hooks/useAccount";
+import MatchResult from "./matching/elder/MatchResult";
+import { Match } from "../types";
 
 export function MatchingPage() {
-  const { id, name, setId, setName } = useAccount();
-  const [users, setUsers] = useState([]);
+  const { id, name } = useAccount();
+  const [match, setMatch] = useState<Match>({
+    maxUserSize: 5,
+    users: [],
+  });
   const [maxUser, setMaxUser] = useState(undefined);
   const [gid, setGid] = useState("");
 
@@ -16,21 +21,11 @@ export function MatchingPage() {
     if (!gid) {
       return;
     }
-    fetchMatch(gid).then((data) => setUsers(data["users"]));
+    fetchMatch(gid).then((data) => setMatch(data));
   }, [gid]);
 
   return (
     <div className="flex flex-col p-2">
-      <input
-        value={id}
-        onChange={(e) => setId(e.target.value)}
-        placeholder="id"
-      />
-      <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="name"
-      />
       <input
         value={gid}
         onChange={(e) => setGid(e.target.value)}
@@ -47,7 +42,7 @@ export function MatchingPage() {
             });
 
             const data = await res.json();
-            setUsers(data.users || []);
+            setMatch(data);
             setMaxUser(data.maxUserSize);
           }}
         >
@@ -57,17 +52,11 @@ export function MatchingPage() {
 
       {maxUser && (
         <div>
-          {users.length}/{maxUser}
+          {match.users.length}/{maxUser}
         </div>
       )}
 
-      <ul>
-        {users.map(({ id, name }, i) => (
-          <li key={`${id}-${i}`}>
-            {id}, {name}
-          </li>
-        ))}
-      </ul>
+      <MatchResult match={match} />
     </div>
   );
 }
