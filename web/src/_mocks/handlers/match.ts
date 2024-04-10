@@ -54,21 +54,27 @@ const getMatch = http.get("/match", async ({ cookies }) => {
     }
 
     return HttpResponse.json({ status: "idle" }, { status: 200 });
-  } else {
+  }
+
+  if (account.role === "dolbomi") {
     const users = matchingQueue.users();
-    return HttpResponse.json({ users }, { status: 200 });
+    const matched = Matched;
+    return HttpResponse.json({ users, matched }, { status: 200 });
   }
 });
 
-const postMatch = http.post<object, { id: string; name: string }>(
-  "/match",
-  async ({ request }) => {
-    const user = await request.json();
-    await matchingQueue.add(user);
+const postMatch = http.post("/match", async ({ cookies }) => {
+  const token = cookies[TOKEN_KEY];
+  const account = mockAccounts.find((a) => a.token === token);
 
-    return HttpResponse.json({ status: 200 });
+  if (!account) {
+    return HttpResponse.json({}, { status: 403 });
   }
-);
+
+  await matchingQueue.add({ id: account.id, name: account.name });
+
+  return HttpResponse.json({ status: 200 });
+});
 
 async function sendPushNotification(
   expoPushToken: string,

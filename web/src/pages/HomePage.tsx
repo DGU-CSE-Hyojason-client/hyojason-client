@@ -15,9 +15,8 @@ export function HomePage() {
       return;
     }
 
-    setAccount({ id, name, role });
-
     login({ id, name, role }).then(async () => {
+      setAccount({ id, name, role });
       const data = await me();
       console.log(data);
     });

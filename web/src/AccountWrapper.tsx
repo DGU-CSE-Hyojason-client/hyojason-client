@@ -13,8 +13,10 @@ export function AccountWrapper({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const account = { id: "hyojason2024", name: "효자손", role: ROLE.elder };
-    setAccount(account);
-    login(account);
+
+    login(account).then(() => {
+      setAccount(account);
+    });
   }, [setAccount]);
 
   return <>{children}</>;
