@@ -1,7 +1,15 @@
 import { css } from "@emotion/react";
 import { Link } from "react-router-dom";
-import { route } from "../router";
 import { useEffect, useState } from "react";
+import HomeIcon from "../assets/icons/home.svg?react";
+import ChatIcon from "../assets/icons/chat.svg?react";
+import GroupIcon from "../assets/icons/group.svg?react";
+
+const route = [
+  { name: "홈", path: "/", Icon: HomeIcon },
+  { name: "매칭", path: "/matching", Icon: GroupIcon },
+  { name: "채팅", path: "/chat", Icon: ChatIcon },
+];
 
 export function GNB() {
   const [tab, setTab] = useState("");
@@ -14,25 +22,29 @@ export function GNB() {
     setTab(tab);
   }
 
+  const items =
+    route.length > 5
+      ? route
+      : route.concat(Array.from({ length: 5 - route.length }).fill(route[0]));
+
   return (
-    <ul className="flex gap-2 bg-slate-400 p-2">
-      {route
-        .map(({ path, name }) => ({ to: path, name }))
-        .map(({ to, name }) => {
-          const border_color = to == tab ? "#ffffff" : "#4e4e4e";
-          const color = to == tab ? "#080808" : "#ffffff";
+    <ul className="flex justify-between rounded-t-lg bg-slate-800 px-4 py-2">
+      {items
+        .map(({ path, name, Icon }) => ({ to: path, name, Icon }))
+        .map(({ to, name, Icon }, i) => {
+          const color = to == tab ? "#ffffff" : "#909090";
           return (
             <li
-              key={name}
-              className="rounded-md"
+              key={`${name}-${i}`}
+              className="rounded-md justify-between"
               css={css`
-                border: 1px solid ${border_color};
                 color: ${color};
               `}
               onClick={() => setTabFromLocation(location.pathname)}
             >
-              <Link className="py-1 px-2" to={to}>
-                {name}
+              <Link className="flex flex-col gap-1 items-center" to={to}>
+                <Icon className="w-5 h-5" style={{ color }} />
+                <span className="text-xs">{name}</span>
               </Link>
             </li>
           );

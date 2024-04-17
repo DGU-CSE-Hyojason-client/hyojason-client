@@ -8,7 +8,6 @@ input {
 
 * {
   box-sizing: border-box;
-  color: var(--tailwindink-slate-700, #334155);
 }
 
 html {

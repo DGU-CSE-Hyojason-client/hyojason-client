@@ -15,7 +15,7 @@ export default function Matches({ account }: { account: Account }) {
 
   return (
     <div>
-      <span>
+      <span className="hidden">
         {account.name}: {account.role}
       </span>
 
@@ -24,16 +24,16 @@ export default function Matches({ account }: { account: Account }) {
           <span>매칭 큐</span>
           <div className="flex flex-col gap-2 text-sm">
             {users.map((user) => (
-              <span>{user.name}</span>
+              <span key={user.id}>{user.name}</span>
             ))}
           </div>
         </div>
         {Object.entries(matched).map(([gid, match]) => (
-          <div className="border-2">
+          <div className="border-2" key={gid}>
             <span>gid: {gid}</span>
             <div className="flex flex-col gap-2 text-sm">
               {match.users.map((user) => (
-                <span>{user.name}</span>
+                <span key={user.id}>{user.name}</span>
               ))}
             </div>
           </div>

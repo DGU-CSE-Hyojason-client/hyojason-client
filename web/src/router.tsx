@@ -5,12 +5,6 @@ import { Layout } from "./pages/Layout";
 import { MatchingPage } from "./pages/MatchingPage";
 import { AccountWrapper } from "./AccountWrapper";
 
-const route = [
-  { name: "home", path: "/" },
-  { name: "matching", path: "/matching" },
-  { name: "chat", path: "/chat" },
-];
-
 const router = createBrowserRouter([
   {
     // 인증필요
@@ -23,7 +17,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       {
-        path: "matching",
+        path: "/matching",
         element: <MatchingPage />,
       },
       {
@@ -34,4 +28,4 @@ const router = createBrowserRouter([
   },
 ]);
 
-export { router, route };
+export { router };
