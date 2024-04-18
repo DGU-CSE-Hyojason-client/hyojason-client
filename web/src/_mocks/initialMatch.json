@@ -1,6 +1,7 @@
 {
   "1": {
-    "maxUserSize": 5,
+    "memberNum": 5,
+    "keyword": ["바둑", "낚시", "트로트"],
     "users": [
       {
         "id": "elder1",
@@ -25,7 +26,8 @@
     ]
   },
   "2": {
-    "maxUserSize": 5,
+    "memberNum": 5,
+    "keyword": ["바둑", "낚시", "트로트"],
     "users": [
       {
         "id": "elder6",
@@ -50,7 +52,8 @@
     ]
   },
   "3": {
-    "maxUserSize": 5,
+    "memberNum": 5,
+    "keyword": ["바둑", "낚시", "트로트"],
     "users": [
       {
         "id": "elder11",

@@ -10,7 +10,8 @@ export type Account = {
 };
 
 export type Match = {
-  maxUserSize: number;
+  memberNum: number;
+  keyword: string[];
   users: User[];
 };
 

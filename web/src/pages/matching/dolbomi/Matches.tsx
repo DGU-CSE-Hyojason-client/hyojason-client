@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import { Account, Match, User } from "../../../types";
-import { getMatch } from "../../../apis/match";
+import { Account, User } from "../../../types";
+import { Group, getCaregiverGroupStatus } from "../../../apis/match";
 
 export default function Matches({ account }: { account: Account }) {
-  const [matched, setMatched] = useState<{ [gid: string]: Match }>({});
+  const [groupList, setGroupList] = useState<Group[]>([]);
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    getMatch().then((data) => {
-      setMatched(data.matched);
-      setUsers(data.users);
+    getCaregiverGroupStatus().then((data) => {
+      if (data) {
+        console.log(data);
+        setGroupList(data.groupList);
+        setUsers(data.users);
+      }
     });
   }, []);
 
@@ -28,12 +31,12 @@ export default function Matches({ account }: { account: Account }) {
             ))}
           </div>
         </div>
-        {Object.entries(matched).map(([gid, match]) => (
-          <div className="border-2" key={gid}>
-            <span>gid: {gid}</span>
+        {groupList.map(({ groupId, keyword }) => (
+          <div className="border-2" key={groupId}>
+            <span>groupId: {groupId}</span>
             <div className="flex flex-col gap-2 text-sm">
-              {match.users.map((user) => (
-                <span key={user.id}>{user.name}</span>
+              {keyword.map((k, i) => (
+                <span key={`${k}-${i}`}>{k}</span>
               ))}
             </div>
           </div>

@@ -5,6 +5,7 @@ import initialMatch from "../initialMatch.json";
 import { Match, User } from "../../types";
 import { TOKEN_KEY } from "../../const";
 import { mockAccounts } from "./account";
+import { matchUri } from "../../apis/match";
 
 const Matched: { [gid: string]: Match } = initialMatch;
 
@@ -30,51 +31,79 @@ export class MockMatchingQueue {
 
 const matchingQueue = new MockMatchingQueue(token);
 
-const getMatch = http.get("/match", async ({ cookies }) => {
-  const token = cookies[TOKEN_KEY];
-  const account = mockAccounts.find((a) => a.token === token);
+const getElderGroupStatus = http.get(
+  matchUri.getElderGroupStatus,
+  async ({ cookies }) => {
+    const token = cookies[TOKEN_KEY];
+    const account = mockAccounts.find((a) => a.token === token);
 
-  if (!account) {
-    return HttpResponse.json({}, { status: 403 });
-  }
+    if (!account) {
+      return HttpResponse.json({}, { status: 403 });
+    }
 
-  if (account.role === "elder") {
-    const matched = Object.entries(Matched);
-    for (const [gid, { users }] of matched) {
-      if (users.find((u) => u.id === account.id)) {
-        return HttpResponse.json({ status: "matched", gid }, { status: 200 });
+    if (account.role === "elder") {
+      const matched = Object.entries(Matched);
+      for (const [gid, { users }] of matched) {
+        if (users.find((u) => u.id === account.id)) {
+          return HttpResponse.json(
+            { status: "finish", groupId: gid },
+            { status: 200 }
+          );
+        }
       }
+
+      const users = matchingQueue.users();
+      const found = users.find((user) => user.id === account.id);
+
+      if (found) {
+        return HttpResponse.json({ status: "ongoing" }, { status: 200 });
+      }
+
+      return HttpResponse.json({ status: "idle" }, { status: 200 });
     }
 
-    const users = matchingQueue.users();
-    const found = users.find((user) => user.id === account.id);
+    return HttpResponse.json({}, { status: 400 });
+  }
+);
 
-    if (found) {
-      return HttpResponse.json({ status: "matching" }, { status: 200 });
+const getCaregiverGroupStatus = http.get(
+  matchUri.getCaregiverGroupStatus,
+  async ({ cookies }) => {
+    const token = cookies[TOKEN_KEY];
+    const account = mockAccounts.find((a) => a.token === token);
+
+    if (!account) {
+      return HttpResponse.json({}, { status: 403 });
     }
 
-    return HttpResponse.json({ status: "idle" }, { status: 200 });
+    if (account.role === "dolbomi") {
+      const users = matchingQueue.users();
+      const matched = Object.entries(Matched).map(([k, v]) => ({
+        ...v,
+        groupId: k,
+      }));
+
+      console.log(matched);
+      return HttpResponse.json({ groupList: matched, users }, { status: 200 });
+    }
   }
+);
 
-  if (account.role === "dolbomi") {
-    const users = matchingQueue.users();
-    const matched = Matched;
-    return HttpResponse.json({ users, matched }, { status: 200 });
+const postElderGroupApply = http.post(
+  matchUri.postElderGroupApply,
+  async ({ cookies }) => {
+    const token = cookies[TOKEN_KEY];
+    const account = mockAccounts.find((a) => a.token === token);
+
+    if (!account) {
+      return HttpResponse.json({}, { status: 403 });
+    }
+
+    await matchingQueue.add({ id: account.id, name: account.name });
+
+    return HttpResponse.json({ status: 200 });
   }
-});
-
-const postMatch = http.post("/match", async ({ cookies }) => {
-  const token = cookies[TOKEN_KEY];
-  const account = mockAccounts.find((a) => a.token === token);
-
-  if (!account) {
-    return HttpResponse.json({}, { status: 403 });
-  }
-
-  await matchingQueue.add({ id: account.id, name: account.name });
-
-  return HttpResponse.json({ status: 200 });
-});
+);
 
 async function sendPushNotification(
   expoPushToken: string,
@@ -103,4 +132,8 @@ async function sendPushNotification(
 
 export { sendPushNotification };
 
-export { getMatch, postMatch };
+export default [
+  getElderGroupStatus,
+  postElderGroupApply,
+  getCaregiverGroupStatus,
+] as const;

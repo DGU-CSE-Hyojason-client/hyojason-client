@@ -1,17 +1,62 @@
-export const getMatch = async () => {
+import { User } from "../types";
+
+export const matchUri = {
+  getElderGroupStatus: "/api/group/status",
+  postElderGroupApply: "/api/group/apply",
+  getCaregiverGroupStatus: "/api/group/caregiver/status",
+  getGroupDetail: "/api/group/detail/:groupId",
+};
+
+export const getElderGroupStatus = async (): Promise<
+  | {
+      status: "ongoing";
+      regionId: number;
+      applicant: number;
+      maximum: number;
+    }
+  | ({
+      status: "finish";
+    } & Group)
+  | null
+> => {
   try {
-    const res = await fetch("/match", { method: "get" });
+    const res = await fetch(matchUri.getElderGroupStatus, { method: "get" });
     return await res.json();
   } catch (e) {
     console.log(e);
+    return null;
   }
 };
 
-export const postMatch = async () => {
+export type Group = {
+  groupId: number;
+  memberNum: number;
+  keyword: string[];
+};
+
+export type CaregiverGroupStatusResult = {
+  groupList: Group[];
+  users: User[];
+};
+export const getCaregiverGroupStatus =
+  async (): Promise<CaregiverGroupStatusResult | null> => {
+    try {
+      const res = await fetch(matchUri.getCaregiverGroupStatus, {
+        method: "get",
+      });
+      return await res.json();
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  };
+
+export const postElderGroupApply = async () => {
   try {
-    const res = await fetch("/match", { method: "post" });
+    const res = await fetch(matchUri.postElderGroupApply, { method: "post" });
     return await res.json();
   } catch (e) {
     console.log(e);
+    return null;
   }
 };

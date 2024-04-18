@@ -1,4 +1,4 @@
 import { login, me } from "./account";
-import { getMatch, postMatch } from "./match";
+import matchApis from "./match";
 
-export const handlers = [login, me, getMatch, postMatch];
+export const handlers = [login, me, ...matchApis];
