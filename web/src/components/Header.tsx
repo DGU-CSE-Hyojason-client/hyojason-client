@@ -30,7 +30,7 @@ export default function Header() {
       </div>
 
       <select
-        className="w-24 bg-black"
+        className="w-24 bg-slate-700 rounded-md text-sm p-1"
         value={role}
         onChange={(e) => setRole(e.target.value as "elder" | "dolbomi")}
       >

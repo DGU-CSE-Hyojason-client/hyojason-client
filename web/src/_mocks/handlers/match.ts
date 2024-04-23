@@ -101,7 +101,30 @@ const postElderGroupApply = http.post(
 
     await matchingQueue.add({ id: account.id, name: account.name });
 
-    return HttpResponse.json({ status: 200 });
+    return HttpResponse.json({}, { status: 200 });
+  }
+);
+
+const getGroupDetail = http.get(
+  matchUri.getGroupDetail,
+  async ({ params, cookies }) => {
+    const token = cookies[TOKEN_KEY];
+    const account = mockAccounts.find((a) => a.token === token);
+
+    if (!account) {
+      return HttpResponse.json({}, { status: 403 });
+    }
+
+    console.log({ params });
+
+    const groupId = params["groupId"] as string;
+
+    if (Matched[groupId]) {
+      const userList = Matched[groupId].users;
+      return HttpResponse.json({ userList }, { status: 200 });
+    }
+
+    return HttpResponse.json({}, { status: 400 });
   }
 );
 
@@ -136,4 +159,5 @@ export default [
   getElderGroupStatus,
   postElderGroupApply,
   getCaregiverGroupStatus,
+  getGroupDetail,
 ] as const;

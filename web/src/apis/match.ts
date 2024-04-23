@@ -34,6 +34,10 @@ export type Group = {
   keyword: string[];
 };
 
+export type GroupDetail = {
+  userList: User[];
+};
+
 export type CaregiverGroupStatusResult = {
   groupList: Group[];
   users: User[];
@@ -54,6 +58,18 @@ export const getCaregiverGroupStatus =
 export const postElderGroupApply = async () => {
   try {
     const res = await fetch(matchUri.postElderGroupApply, { method: "post" });
+    return await res.json();
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+};
+
+export const getGroupDetail = async (
+  groupId: number
+): Promise<GroupDetail | null> => {
+  try {
+    const res = await fetch(`/api/group/detail/${groupId}`, { method: "get" });
     return await res.json();
   } catch (e) {
     console.log(e);

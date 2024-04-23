@@ -21,13 +21,14 @@ export default function Match({ account }: { account: Account }) {
   }, []);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 text-slate-400">
       <span className="hidden">
         {account.name}: {account.role}
       </span>
 
       {status === "idle" && (
         <button
+          className="bg-slate-800 rounded-md p-2 px-1"
           onClick={async () => {
             await postElderGroupApply();
             setStatus("ongoing");
@@ -36,7 +37,11 @@ export default function Match({ account }: { account: Account }) {
           매칭
         </button>
       )}
-      {status === "ongoing" && <div>매칭중입니다...</div>}
+      {status === "ongoing" && (
+        <button className="bg-slate-800 rounded-md p-2 px-1">
+          매칭중입니다...
+        </button>
+      )}
       {/* {status === "finish" && <MatchResult match={}/>} */}
     </div>
   );
