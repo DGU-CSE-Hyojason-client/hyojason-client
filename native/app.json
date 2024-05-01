@@ -13,7 +13,8 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.leejeongwk98.hyojason-client"
     },
     "android": {
       "adaptiveIcon": {
@@ -30,6 +31,15 @@
       "eas": {
         "projectId": "24245cde-6b87-4079-ab59-7b119300fc86"
       }
-    }
+    },
+    "plugins": [
+      [
+        "@react-native-voice/voice",
+        {
+          "microphonePermission": "Allow hyojason to access your microphone",
+          "speechRecogntionPermission": "Allow hyojason to securely recognize user speech"
+        }
+      ]
+    ]
   }
 }

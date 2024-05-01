@@ -1,9 +1,38 @@
 import { useState, useEffect, useRef } from "react";
-import { Text, View, Button, Platform, StyleSheet } from "react-native";
+import {
+  Text,
+  View,
+  Button,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import Constants from "expo-constants";
 import WebView from "react-native-webview";
+import HomeIcon from "@expo/vector-icons/MaterialCommunityIcons";
+import GroupIcon from "@expo/vector-icons/FontAwesome6";
+import ChatIcon from "@expo/vector-icons/Ionicons";
+import Recording from "./Recording";
+import VoiceModule from "./Voice";
+
+const route = [
+  { name: "홈", path: "/", Icon: HomeIcon, iconName: "home-variant" },
+  { name: "매칭", path: "/matching", Icon: GroupIcon, iconName: "user-group" },
+  {
+    name: "채팅",
+    path: "/chat",
+    Icon: ChatIcon,
+    iconName: "chatbubble-ellipses",
+  },
+];
+
+const routeItems =
+  route.length > 5
+    ? route
+    : // @ts-expect-error ts-ignore
+      route.concat(Array.from({ length: 5 - route.length }).fill(route[0]));
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -98,6 +127,8 @@ export default function App() {
     };
   }, []);
 
+  const [here, setHere] = useState("/");
+
   return (
     // <View
     //   style={{ flex: 1, alignItems: "center", justifyContent: "space-around" }}
@@ -126,12 +157,73 @@ export default function App() {
     //   />
     // </View>
     <>
-      <View></View>
+      <View style={{ marginTop: __DEV__ ? 30 : 0 }}></View>
+
       <WebView
-        style={{ width: "300px" }}
+        style={styles.container}
         originWhitelist={["*"]}
-        source={{ uri: process.env.EXPO_PUBLIC_WEBVIEW_URL }}
+        source={{ uri: `${process.env.EXPO_PUBLIC_WEBVIEW_URL}${here}` }}
       />
+      <View
+        style={{
+          position: "absolute",
+          width: "100%",
+          left: 0,
+          bottom: 0,
+        }}
+      >
+        {here === "/chat" && <VoiceModule />}
+        <View
+          style={{
+            backgroundColor: "#1E293B",
+            display: "flex",
+            paddingRight: 16,
+            paddingLeft: 16,
+            paddingTop: 8,
+            paddingBottom: 8,
+            borderTopLeftRadius: 8,
+            borderTopRightRadius: 8,
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          {routeItems
+            .map(({ path, name, Icon, iconName }) => ({
+              to: path,
+              name,
+              Icon,
+              iconName,
+            }))
+            .map(({ to, name, Icon, iconName }, i) => {
+              const color = to === here ? "#ffffff" : "#909090";
+              const size = name === "매칭" ? 15 : 20;
+              return (
+                <TouchableOpacity
+                  id={`${name}-${i}`}
+                  key={`${name}-${i}`}
+                  style={{ padding: 4 }}
+                  onPress={() => {
+                    setHere(to);
+                  }}
+                >
+                  <View
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                    activeOpacity={0.7}
+                  >
+                    <View style={{ height: 20, width: 20 }}>
+                      <Icon name={iconName} size={size} color={color} />
+                    </View>
+                    <Text style={{ color, fontSize: 12 }}>{name}</Text>
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
+        </View>
+      </View>
     </>
   );
 }
@@ -142,6 +234,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: __DEV__ ? 50 : 0,
   },
 });
