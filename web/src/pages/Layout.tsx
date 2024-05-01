@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-// import { GNB } from "../components/GNB";
+import { GNB } from "../components/GNB";
 import Header from "../components/Header";
 export function Layout() {
   return (
@@ -10,6 +10,7 @@ export function Layout() {
           <Outlet />
         </div>
       </div>
+      <GNB />
     </div>
   );
 }
