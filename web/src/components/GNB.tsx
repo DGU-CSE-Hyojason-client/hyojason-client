@@ -29,7 +29,7 @@ export function GNB() {
         route.concat(Array.from({ length: 5 - route.length }).fill(route[0]));
 
   return (
-    <ul className="flex justify-between rounded-t-lg bg-slate-800 px-4 py-2">
+    <ul className="flex justify-between rounded-t-lg bg-slate-800 px-4 py-2 hidden">
       {items
         .map(({ path, name, Icon }) => ({ to: path, name, Icon }))
         .map(({ to, name, Icon }, i) => {
