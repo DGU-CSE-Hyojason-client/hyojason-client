@@ -25,7 +25,8 @@ export function GNB() {
   const items =
     route.length > 5
       ? route
-      : route.concat(Array.from({ length: 5 - route.length }).fill(route[0]));
+      : // @ts-expect-error ts-ignore
+        route.concat(Array.from({ length: 5 - route.length }).fill(route[0]));
 
   return (
     <ul className="flex justify-between rounded-t-lg bg-slate-800 px-4 py-2">
