@@ -30,22 +30,6 @@ export function ChatPage() {
             </div>
           </div>
         </div>
-
-        <div className="p-4 bg-gray-50">
-          <form className="flex">
-            <input
-              type="text"
-              placeholder="Type your message here"
-              className="w-full border rounded-md px-3 py-2 focus:outline-none focus:border-blue-500"
-            />
-            <button
-              type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md ml-2"
-            >
-              Send
-            </button>
-          </form>
-        </div>
       </div>
     </div>
   );
