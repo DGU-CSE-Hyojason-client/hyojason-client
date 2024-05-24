@@ -1,79 +1,79 @@
 {
   "1": {
     "memberNum": 5,
-    "keyword": ["바둑", "낚시", "트로트"],
+    "keyword": ["바둑", "화원 가꾸기", "문학 독서"],
     "users": [
       {
         "id": "elder1",
-        "name": "노인1"
+        "name": "김영희"
       },
       {
         "id": "elder2",
-        "name": "노인2"
+        "name": "이철수"
       },
       {
         "id": "elder3",
-        "name": "노인3"
+        "name": "박순자"
       },
       {
         "id": "elder4",
-        "name": "노인4"
+        "name": "최만식"
       },
       {
         "id": "elder5",
-        "name": "노인5"
+        "name": "장영남"
       }
     ]
   },
   "2": {
     "memberNum": 5,
-    "keyword": ["바둑", "낚시", "트로트"],
+    "keyword": ["산책", "공예", "피아노 연주"],
     "users": [
       {
         "id": "elder6",
-        "name": "노인6"
+        "name": "정미자"
       },
       {
         "id": "elder7",
-        "name": "노인7"
+        "name": "홍길동"
       },
       {
         "id": "elder8",
-        "name": "노인8"
+        "name": "송영희"
       },
       {
         "id": "elder9",
-        "name": "노인9"
+        "name": "강철수"
       },
       {
         "id": "elder10",
-        "name": "노인10"
+        "name": "유미영"
       }
     ]
   },
   "3": {
     "memberNum": 5,
-    "keyword": ["바둑", "낚시", "트로트"],
+    "keyword": ["미술", "차 마시기", "여행"],
     "users": [
       {
         "id": "elder11",
-        "name": "노인11"
+        "name": "이길동"
       },
       {
         "id": "elder12",
-        "name": "노인12"
+        "name": "나순자"
       },
       {
         "id": "elder13",
-        "name": "노인13"
+        "name": "박철수"
       },
       {
         "id": "elder14",
-        "name": "노인14"
+        "name": "김미영"
       },
       {
         "id": "elder15",
-        "name": "노인15"
+        "name": "장순자"
       }
     ]
   }

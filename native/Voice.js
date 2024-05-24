@@ -77,6 +77,7 @@ export default function VoiceModule() {
               height: "100%",
               backgroundColor: "white",
               padding: 8,
+              fontSize: 20,
             }}
             onChangeText={(text) => setResult(text)}
           />
@@ -89,6 +90,7 @@ export default function VoiceModule() {
               color: "#909090",
               padding: 8,
               borderRadius: 20,
+              fontSize: 20,
             }}
           >
             지우기

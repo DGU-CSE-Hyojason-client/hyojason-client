@@ -14,7 +14,6 @@ import WebView from "react-native-webview";
 import HomeIcon from "@expo/vector-icons/MaterialCommunityIcons";
 import GroupIcon from "@expo/vector-icons/FontAwesome6";
 import ChatIcon from "@expo/vector-icons/Ionicons";
-import Recording from "./Recording";
 import VoiceModule from "./Voice";
 
 const route = [
@@ -162,7 +161,12 @@ export default function App() {
       <WebView
         style={styles.container}
         originWhitelist={["*"]}
-        source={{ uri: `${process.env.EXPO_PUBLIC_WEBVIEW_URL}${here}` }}
+        source={{
+          uri: `${
+            process.env.EXPO_PUBLIC_WEBVIEW_URL ||
+            "https://hyojason-client.vercel.app"
+          }${here}`,
+        }}
       />
       <View
         style={{
@@ -217,7 +221,7 @@ export default function App() {
                     <View style={{ height: 20, width: 20 }}>
                       <Icon name={iconName} size={size} color={color} />
                     </View>
-                    <Text style={{ color, fontSize: 12 }}>{name}</Text>
+                    <Text style={{ color, fontSize: 16 }}>{name}</Text>
                   </View>
                 </TouchableOpacity>
               );

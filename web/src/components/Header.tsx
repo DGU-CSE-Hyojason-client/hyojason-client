@@ -23,7 +23,7 @@ export default function Header() {
   }, [account, id, name, role, setAccount]);
 
   return (
-    <div className="flex items-center justify-between bg-slate-800 p-3 font-extralight text-xl">
+    <div className="flex items-center justify-between bg-slate-800 p-3 font-extralight text-3xl">
       <div className="flex gap-1 items-center">
         <Icon className="w-10 h-10" />
         <span>hyojason</span>
