@@ -9,7 +9,7 @@ export default function useAccount() {
 
   const [id, setId] = useState(account?.id || "");
   const [name, setName] = useState(account?.name || "");
-  const [role, setRole] = useState(account?.role || "elder");
+  const [role, setRole] = useState(account?.role || "NORMAL");
 
   useEffect(() => {
     if (!account?.id || !account?.name) {

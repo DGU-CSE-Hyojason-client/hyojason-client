@@ -16,8 +16,8 @@ export type Match = {
 };
 
 export const ROLE = {
-  elder: "elder",
-  dolbomi: "dolbomi",
+  NORMAL: "NORMAL",
+  MASTER: "MASTER",
 } as const;
 
 export type ROLE = keyof typeof ROLE;

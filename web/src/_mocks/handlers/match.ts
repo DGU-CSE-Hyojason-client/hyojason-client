@@ -2,7 +2,7 @@ import { HttpResponse, http } from "msw";
 import { token } from "../config";
 import initialQueue from "../initialQueue.json";
 import initialMatch from "../initialMatch.json";
-import { Match, User } from "../../types";
+import { Match, ROLE, User } from "../../types";
 import { TOKEN_KEY } from "../../const";
 import { mockAccounts } from "./account";
 import { matchUri } from "../../apis/match";
@@ -41,7 +41,7 @@ const getElderGroupStatus = http.get(
       return HttpResponse.json({}, { status: 403 });
     }
 
-    if (account.role === "elder") {
+    if (account.role === ROLE.NORMAL) {
       const matched = Object.entries(Matched);
       for (const [gid, { users }] of matched) {
         if (users.find((u) => u.id === account.id)) {
@@ -76,7 +76,7 @@ const getCaregiverGroupStatus = http.get(
       return HttpResponse.json({}, { status: 403 });
     }
 
-    if (account.role === "dolbomi") {
+    if (account.role === ROLE.MASTER) {
       const users = matchingQueue.users();
       const matched = Object.entries(Matched).map(([k, v]) => ({
         ...v,

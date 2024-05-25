@@ -1,3 +1,4 @@
+import { requester } from ".";
 import { User } from "../types";
 
 export const matchUri = {
@@ -6,6 +7,8 @@ export const matchUri = {
   getCaregiverGroupStatus: "/api/group/caregiver/status",
   getGroupDetail: "/api/group/detail/:groupId",
 };
+
+export const apiUrl = () => import.meta.env.VITE_API_URL || "";
 
 export const getElderGroupStatus = async (): Promise<
   | {
@@ -20,7 +23,11 @@ export const getElderGroupStatus = async (): Promise<
   | null
 > => {
   try {
-    const res = await fetch(matchUri.getElderGroupStatus, { method: "get" });
+    const res = await requester(
+      "get",
+      apiUrl() + matchUri.getElderGroupStatus,
+      {}
+    );
     return await res.json();
   } catch (e) {
     console.log(e);
@@ -45,9 +52,11 @@ export type CaregiverGroupStatusResult = {
 export const getCaregiverGroupStatus =
   async (): Promise<CaregiverGroupStatusResult | null> => {
     try {
-      const res = await fetch(matchUri.getCaregiverGroupStatus, {
-        method: "get",
-      });
+      const res = await requester(
+        "get",
+        apiUrl() + matchUri.getCaregiverGroupStatus,
+        {}
+      );
       return await res.json();
     } catch (e) {
       console.log(e);
@@ -57,7 +66,11 @@ export const getCaregiverGroupStatus =
 
 export const postElderGroupApply = async () => {
   try {
-    const res = await fetch(matchUri.postElderGroupApply, { method: "post" });
+    const res = await requester(
+      "post",
+      apiUrl() + matchUri.postElderGroupApply,
+      {}
+    );
     return await res.json();
   } catch (e) {
     console.log(e);
@@ -69,7 +82,11 @@ export const getGroupDetail = async (
   groupId: number
 ): Promise<GroupDetail | null> => {
   try {
-    const res = await fetch(`/api/group/detail/${groupId}`, { method: "get" });
+    const res = await requester(
+      "get",
+      apiUrl() + `/api/group/detail/${groupId}`,
+      {}
+    );
     return await res.json();
   } catch (e) {
     console.log(e);

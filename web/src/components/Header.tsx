@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import Icon from "../assets/icons/hand_love.svg?react";
 import useAccount from "../hooks/useAccount";
-import { login, me } from "../apis/account";
+import { login } from "../apis/account";
+import { ROLE } from "../types";
 
 export default function Header() {
   const { account, id, name, role, setRole, setAccount } = useAccount();
@@ -15,10 +16,8 @@ export default function Header() {
       return;
     }
 
-    login({ id, name, role }).then(async () => {
+    login({ id, name, role }).then(async (role) => {
       setAccount({ id, name, role });
-      const data = await me();
-      console.log(data);
     });
   }, [account, id, name, role, setAccount]);
 
@@ -32,10 +31,10 @@ export default function Header() {
       <select
         className="w-24 bg-slate-700 rounded-md text-sm p-1"
         value={role}
-        onChange={(e) => setRole(e.target.value as "elder" | "dolbomi")}
+        onChange={(e) => setRole(e.target.value as "NORMAL" | "MASTER")}
       >
-        <option value="elder">노인</option>
-        <option value="dolbomi">돌보미</option>
+        <option value={ROLE.NORMAL}>노인</option>
+        <option value={ROLE.MASTER}>돌보미</option>
       </select>
     </div>
   );

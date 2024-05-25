@@ -1,3 +1,7 @@
+import { requester } from ".";
+import { ROLE } from "../types";
+import { apiUrl } from "./match";
+
 export const login = async ({
   id,
   name,
@@ -8,23 +12,18 @@ export const login = async ({
   role: string;
 }) => {
   try {
-    const res = await fetch("/login", {
-      method: "post",
-      body: JSON.stringify({ id, name, role }),
+    const res = await requester("post", apiUrl() + "/auth/login", {
+      id,
+      name,
+      role,
     });
     const data = await res.json();
-    return data;
-  } catch (e) {
-    console.log("login error" + e);
-  }
-};
 
-export const me = async () => {
-  try {
-    const res = await fetch("/me", {
-      method: "get",
-    });
-    return await res.json();
+    if (data.token) {
+      localStorage.setItem("jwt", data.token);
+    }
+
+    return data.role || ROLE.MASTER;
   } catch (e) {
     console.log("login error" + e);
   }
