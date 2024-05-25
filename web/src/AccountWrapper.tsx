@@ -12,7 +12,12 @@ export function AccountWrapper({ children }: { children: React.ReactNode }) {
   );
 
   useEffect(() => {
-    const account = { id: "hyojason2024", name: "효자손", role: ROLE.NORMAL };
+    const account = {
+      id: "zxc123",
+      password: "zxc123",
+      name: "효자손",
+      role: ROLE.NORMAL,
+    };
 
     login(account).then(() => {
       setAccount(account);
