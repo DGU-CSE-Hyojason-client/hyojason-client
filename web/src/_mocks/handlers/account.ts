@@ -10,14 +10,14 @@ export const mockAccounts: MockAccount[] = [
   {
     id: "dolbomi1",
     name: "dolbomi1",
-    role: ROLE.MASTER,
-    token: "dolbomi1",
+    role: ROLE.ADMIN,
+    token: "NORMAL_zxc123",
   },
   {
     id: "elder_me",
     name: "elder_me",
     role: ROLE.NORMAL,
-    token: "elder_me",
+    token: "NORMAL_zxc123",
   },
 ];
 

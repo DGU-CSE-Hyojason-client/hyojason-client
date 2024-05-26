@@ -9,7 +9,7 @@ export function MatchingPage() {
   return (
     <>
       {!account && <></>}
-      {account?.role === ROLE.MASTER && (
+      {account?.role === ROLE.ADMIN && (
         <div className="flex flex-col p-2">
           <Matches account={account} />
         </div>

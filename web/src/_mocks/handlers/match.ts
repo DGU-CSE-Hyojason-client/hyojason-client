@@ -31,52 +31,47 @@ export class MockMatchingQueue {
 
 const matchingQueue = new MockMatchingQueue(token);
 
-const getElderGroupStatus = http.get(
-  matchUri.getElderGroupStatus,
-  async ({ cookies }) => {
-    const token = cookies[TOKEN_KEY];
-    const account = mockAccounts.find((a) => a.token === token);
+const getElderGroupStatus = http.get(matchUri.getElderGroupStatus, async () => {
+  const account = mockAccounts.find((a) => a.role === ROLE.NORMAL);
 
-    if (!account) {
-      return HttpResponse.json({}, { status: 403 });
-    }
-
-    if (account.role === ROLE.NORMAL) {
-      const matched = Object.entries(Matched);
-      for (const [gid, { users }] of matched) {
-        if (users.find((u) => u.id === account.id)) {
-          return HttpResponse.json(
-            { status: "finish", groupId: gid },
-            { status: 200 }
-          );
-        }
-      }
-
-      const users = matchingQueue.users();
-      const found = users.find((user) => user.id === account.id);
-
-      if (found) {
-        return HttpResponse.json({ status: "ongoing" }, { status: 200 });
-      }
-
-      return HttpResponse.json({ status: "idle" }, { status: 200 });
-    }
-
-    return HttpResponse.json({}, { status: 400 });
+  if (!account) {
+    return HttpResponse.json({}, { status: 403 });
   }
-);
+
+  if (account.role === ROLE.NORMAL) {
+    const matched = Object.entries(Matched);
+    for (const [gid, { users }] of matched) {
+      if (users.find((u) => u.id === account.id)) {
+        return HttpResponse.json(
+          { status: "finish", groupId: gid },
+          { status: 200 }
+        );
+      }
+    }
+
+    const users = matchingQueue.users();
+    const found = users.find((user) => user.id === account.id);
+
+    if (found) {
+      return HttpResponse.json({ status: "ongoing" }, { status: 200 });
+    }
+
+    return HttpResponse.json({ status: "idle" }, { status: 200 });
+  }
+
+  return HttpResponse.json({}, { status: 400 });
+});
 
 const getCaregiverGroupStatus = http.get(
   matchUri.getCaregiverGroupStatus,
-  async ({ cookies }) => {
-    const token = cookies[TOKEN_KEY];
-    const account = mockAccounts.find((a) => a.token === token);
+  async () => {
+    const account = mockAccounts.find((a) => a.role === ROLE.ADMIN);
 
     if (!account) {
       return HttpResponse.json({}, { status: 403 });
     }
 
-    if (account.role === ROLE.MASTER) {
+    if (account.role === ROLE.ADMIN) {
       const users = matchingQueue.users();
       const matched = Object.entries(Matched).map(([k, v]) => ({
         ...v,

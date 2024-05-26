@@ -4,6 +4,20 @@ import { useAccountStore } from "./store";
 import { login } from "./apis/account";
 import { ROLE } from "./types";
 
+export const MOCK_NORMAL = {
+  id: "zxc123",
+  password: "zxc123",
+  name: "효자손",
+  role: ROLE.NORMAL,
+};
+
+export const MOCK_ADMIN = {
+  id: "admin",
+  password: "admin",
+  name: "admin",
+  role: ROLE.ADMIN,
+};
+
 export function AccountWrapper({ children }: { children: React.ReactNode }) {
   const { setAccount } = useAccountStore(
     useShallow((state) => ({
@@ -12,12 +26,7 @@ export function AccountWrapper({ children }: { children: React.ReactNode }) {
   );
 
   useEffect(() => {
-    const account = {
-      id: "zxc123",
-      password: "zxc123",
-      name: "효자손",
-      role: ROLE.NORMAL,
-    };
+    const account = MOCK_NORMAL;
 
     login(account).then(() => {
       setAccount(account);

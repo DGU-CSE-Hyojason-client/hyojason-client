@@ -17,7 +17,7 @@ export type Match = {
 
 export const ROLE = {
   NORMAL: "NORMAL",
-  MASTER: "MASTER",
+  ADMIN: "ADMIN",
 } as const;
 
 export type ROLE = keyof typeof ROLE;

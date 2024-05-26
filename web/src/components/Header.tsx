@@ -3,6 +3,7 @@ import Icon from "../assets/icons/hand_love.svg?react";
 import useAccount from "../hooks/useAccount";
 import { login } from "../apis/account";
 import { ROLE } from "../types";
+import { MOCK_ADMIN, MOCK_NORMAL } from "../AccountWrapper";
 
 export default function Header() {
   const { account, id, name, role, setRole, setAccount } = useAccount();
@@ -31,10 +32,18 @@ export default function Header() {
       <select
         className="w-24 bg-slate-700 rounded-md text-sm p-1"
         value={role}
-        onChange={(e) => setRole(e.target.value as "NORMAL" | "MASTER")}
+        onChange={(e) => {
+          if (e.target.value === ROLE.NORMAL) {
+            setRole(ROLE.NORMAL);
+            setAccount(MOCK_NORMAL);
+          } else {
+            setRole(ROLE.ADMIN);
+            setAccount(MOCK_ADMIN);
+          }
+        }}
       >
         <option value={ROLE.NORMAL}>노인</option>
-        <option value={ROLE.MASTER}>돌보미</option>
+        <option value={ROLE.ADMIN}>돌보미</option>
       </select>
     </div>
   );

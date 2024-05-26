@@ -23,7 +23,7 @@ export const login = async ({
       localStorage.setItem("jwt", data.token);
     }
 
-    return data.role || ROLE.MASTER;
+    return data.role || ROLE.ADMIN;
   } catch (e) {
     console.log("login error" + e);
   }
