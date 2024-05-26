@@ -128,6 +128,15 @@ export default function App() {
 
   const [here, setHere] = useState("/");
 
+  const webviewRef = useRef(null);
+
+  const injectJavaScript = (text) => {
+    const script = `
+      document.getElementById('root').dispatchEvent(new CustomEvent('changeInput', { detail: ${text} }));
+    `;
+    webviewRef.current.injectJavaScript(script);
+  };
+
   return (
     // <View
     //   style={{ flex: 1, alignItems: "center", justifyContent: "space-around" }}
@@ -159,6 +168,7 @@ export default function App() {
       <View style={{ marginTop: __DEV__ ? 30 : 0 }}></View>
 
       <WebView
+        ref={webviewRef}
         style={styles.container}
         originWhitelist={["*"]}
         source={{
@@ -167,6 +177,7 @@ export default function App() {
             "https://hyojason-client.vercel.app"
           }${here}`,
         }}
+        javaScriptEnabled={true}
       />
       <View
         style={{
@@ -176,7 +187,9 @@ export default function App() {
           bottom: 0,
         }}
       >
-        {here === "/chat" && <VoiceModule />}
+        {here === "/chat" && (
+          <VoiceModule injectJavaScript={injectJavaScript} />
+        )}
         <View
           style={{
             backgroundColor: "#1E293B",

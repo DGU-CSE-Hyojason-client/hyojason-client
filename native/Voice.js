@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import Voice from "@react-native-voice/voice";
-export default function VoiceModule() {
+export default function VoiceModule({ injectJavaScript }) {
   const [result, setResult] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
@@ -96,6 +96,9 @@ export default function VoiceModule() {
             지우기
           </Text>
         </TouchableOpacity>
+        <View style={{ padding: 10 }}>
+          <Button title="보내기" onPress={() => injectJavaScript(result)} />
+        </View>
       </SafeAreaView>
       <View>
         <TouchableOpacity
