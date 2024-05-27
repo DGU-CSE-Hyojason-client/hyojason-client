@@ -5,6 +5,7 @@ export function ChatPage() {
 
   useEffect(() => {
     const handleChangeInput = (event: CustomEvent) => {
+      console.log(event.detail);
       setInputValue(event.detail);
     };
 
@@ -43,7 +44,7 @@ export function ChatPage() {
 
               <BotChat chat="· · ·" />
 
-              <input type="text" id="myInput" value={inputValue} readOnly />
+              {inputValue}
             </div>
           </div>
         </div>
