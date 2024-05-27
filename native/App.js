@@ -131,8 +131,10 @@ export default function App() {
   const webviewRef = useRef(null);
 
   const injectJavaScript = (text) => {
+    console.log(text);
     const script = `
-      document.getElementById('root').dispatchEvent(new CustomEvent('changeInput', { detail: ${text} }));
+      console.log('${text}');
+      document.getElementById('root').dispatchEvent(new CustomEvent('changeInput', { detail: '${text}' }));
     `;
     webviewRef.current.injectJavaScript(script);
   };
