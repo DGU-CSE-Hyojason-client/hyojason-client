@@ -4,16 +4,21 @@ export function ChatPage() {
   const [inputValue, setInputValue] = useState("Initial Text");
 
   useEffect(() => {
-    const handleChangeInput = (event) => {
+    const handleChangeInput = (event: CustomEvent) => {
       setInputValue(event.detail);
     };
-    document
-      .getElementById("root")!
-      .addEventListener("changeInput", handleChangeInput);
+
+    const rootElement = document.getElementById("root");
+
+    rootElement?.addEventListener(
+      "changeInput",
+      handleChangeInput as EventListener
+    );
     return () => {
-      document
-        .getElementById("root")!
-        .removeEventListener("changeInput", handleChangeInput);
+      rootElement?.removeEventListener(
+        "changeInput",
+        handleChangeInput as EventListener
+      );
     };
   }, []);
 
