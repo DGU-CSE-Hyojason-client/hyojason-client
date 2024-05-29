@@ -13,10 +13,6 @@ export default function Header() {
       return;
     }
 
-    if (account.role === role) {
-      return;
-    }
-
     login(account).then(async () => {
       setAccount(account);
     });
