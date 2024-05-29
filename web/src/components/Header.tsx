@@ -17,8 +17,8 @@ export default function Header() {
       return;
     }
 
-    login({ id, name, role }).then(async (role) => {
-      setAccount({ id, name, role });
+    login(account).then(async () => {
+      setAccount(account);
     });
   }, [account, id, name, role, setAccount]);
 

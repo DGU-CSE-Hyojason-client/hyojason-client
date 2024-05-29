@@ -5,6 +5,7 @@ export type User = {
 
 export type Account = {
   id: string;
+  password: string;
   name: string;
   role: ROLE;
 };
