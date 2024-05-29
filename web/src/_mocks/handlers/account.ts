@@ -8,25 +8,28 @@ export type MockAccount = Account & {
 
 export const mockAccounts: MockAccount[] = [
   {
-    id: "dolbomi1",
-    name: "dolbomi1",
+    id: "admin",
+    name: "zxc123",
+    password: "admin",
     role: ROLE.ADMIN,
     token: "NORMAL_zxc123",
   },
   {
-    id: "elder_me",
-    name: "elder_me",
+    id: "zxc123",
+    name: "zxc123",
+    password: "zxc123",
     role: ROLE.NORMAL,
     token: "NORMAL_zxc123",
   },
 ];
 
 const login = http.post<object, Account>("/auth/login", async ({ request }) => {
-  const { id, name, role } = await request.json();
+  const { id, password, name, role } = await request.json();
   const token = `${role}_${id}`;
 
   mockAccounts.push({
     id,
+    password,
     name,
     role,
     token,
