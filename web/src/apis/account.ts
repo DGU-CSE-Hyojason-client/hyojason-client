@@ -4,16 +4,19 @@ import { apiUrl } from "./match";
 
 export const login = async ({
   id,
+  password,
   name,
   role,
 }: {
   id: string;
+  password: string;
   name: string;
   role: string;
 }) => {
   try {
     const res = await requester("post", apiUrl() + "/auth/login", {
       id,
+      password,
       name,
       role,
     });
