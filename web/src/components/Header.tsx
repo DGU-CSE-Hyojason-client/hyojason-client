@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Icon from "../assets/icons/hand_love.svg?react";
 import useAccount from "../hooks/useAccount";
 import { login } from "../apis/account";
-import { ROLE } from "../types";
+import { Account, ROLE } from "../types";
 import { MOCK_ADMIN, MOCK_NORMAL } from "../AccountWrapper";
 
 export default function Header() {
@@ -13,8 +13,16 @@ export default function Header() {
       return;
     }
 
-    login(account).then(async () => {
-      setAccount(account);
+    let ac: Account;
+
+    if (role === ROLE.NORMAL) {
+      ac = MOCK_NORMAL;
+    } else {
+      ac = MOCK_ADMIN;
+    }
+
+    login(ac).then(async () => {
+      setAccount(ac);
     });
   }, [account, id, name, role, setAccount]);
 
@@ -31,10 +39,8 @@ export default function Header() {
         onChange={(e) => {
           if (e.target.value === ROLE.NORMAL) {
             setRole(ROLE.NORMAL);
-            setAccount(MOCK_NORMAL);
           } else {
             setRole(ROLE.ADMIN);
-            setAccount(MOCK_ADMIN);
           }
         }}
       >
