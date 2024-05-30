@@ -96,8 +96,8 @@ export function ChatPage() {
           });
         }
       })
-      .catch(() => {
-        alert("!!");
+      .catch((e) => {
+        alert(e);
       });
 
     const t = setTimeout(() => {
