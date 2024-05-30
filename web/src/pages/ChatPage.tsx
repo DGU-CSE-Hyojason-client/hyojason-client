@@ -100,7 +100,7 @@ export function ChatPage() {
       });
 
     const t = setTimeout(() => {
-      console.log("zz");
+      alert("10초동안 동작하지 않았어요!");
     }, 1000);
 
     return () => clearTimeout(t);
