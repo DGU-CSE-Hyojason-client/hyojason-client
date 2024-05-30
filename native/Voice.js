@@ -57,7 +57,11 @@ export default function VoiceModule({ injectJavaScript }) {
   }, []);
 
   return (
-    <View>
+    <View
+      style={{
+        backgroundColor: "#10172A",
+      }}
+    >
       <SafeAreaView
         style={{
           alignSelf: "center",
@@ -65,6 +69,7 @@ export default function VoiceModule({ injectJavaScript }) {
           display: "flex",
           flexDirection: "row",
           gap: 16,
+          backgroundColor: "white",
         }}
       >
         <View>

@@ -19,8 +19,9 @@ export const MOCK_ADMIN: Account = {
 };
 
 export function AccountWrapper({ children }: { children: React.ReactNode }) {
-  const { setAccount } = useAccountStore(
+  const { account, setAccount } = useAccountStore(
     useShallow((state) => ({
+      account: state.account,
       setAccount: state.setAccount,
     }))
   );
@@ -32,6 +33,10 @@ export function AccountWrapper({ children }: { children: React.ReactNode }) {
       setAccount(account);
     });
   }, [setAccount]);
+
+  if (!account) {
+    return <></>;
+  }
 
   return <>{children}</>;
 }

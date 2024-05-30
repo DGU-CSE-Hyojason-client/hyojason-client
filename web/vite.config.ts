@@ -13,12 +13,12 @@ export default defineConfig({
     }),
   ],
   server: {
-    // proxy: {
-    //   "/api": {
-    //     target: "https://exp.host",
-    //     changeOrigin: true,
-    //     rewrite: (path) => path.replace(/^\/api/, "/--/api"),
-    //   },
-    // },
+    proxy: {
+      "/api/chat/dialogList": {
+        target: "https://api.hyoja.shop",
+        changeOrigin: true,
+        // rewrite: (path) => path.replace(/^\/api/, "/--/api"),
+      },
+    },
   },
 });

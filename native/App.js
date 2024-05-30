@@ -175,8 +175,7 @@ export default function App() {
         originWhitelist={["*"]}
         source={{
           uri: `${
-            process.env.EXPO_PUBLIC_WEBVIEW_URL ||
-            "https://hyojason-client.vercel.app"
+            process.env.EXPO_PUBLIC_WEBVIEW_URL || "https://hyoja.shop"
           }${here}`,
         }}
         javaScriptEnabled={true}

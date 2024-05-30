@@ -1,12 +1,39 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import useAccount from "../hooks/useAccount";
+import { Dialog, getDialogList } from "../apis/chat";
+
+const initialText = "Initial Text";
 
 export function ChatPage() {
-  const [inputValue, setInputValue] = useState("Initial Text");
+  const { account } = useAccount();
+  const [inputValue, setInputValue] = useState(initialText);
+  const [chatCount, setChatCount] = useState(0);
+  const [dialogList, setDialogList] = useState<Dialog[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getDialogList().then((data) => {
+      if (!data) {
+        return;
+      }
+      setDialogList(data);
+
+      if (!chatBoxRef.current) {
+        return;
+      }
+      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+
+      setTimeout(() => {
+        setLoading(false);
+      }, 200);
+    });
+  }, [account]);
 
   useEffect(() => {
     const handleChangeInput = (event: CustomEvent) => {
       console.log(event.detail);
       setInputValue(event.detail);
+      setChatCount((c) => c + 1);
     };
 
     const rootElement = document.getElementById("root");
@@ -23,29 +50,100 @@ export function ChatPage() {
     };
   }, []);
 
+  useEffect(() => {
+    if (inputValue === initialText) {
+      return;
+    }
+
+    const t = setTimeout(() => {
+      console.log("zz");
+    }, 1000);
+
+    return () => clearTimeout(t);
+  }, [chatCount, inputValue]);
+
+  const [scrollTop, setScrollTop] = useState(2000);
+  const [showScrollDown, setShowScrollDown] = useState(false);
+
+  useEffect(() => {
+    if (!chatBoxRef.current) {
+      return;
+    }
+    if (scrollTop < 1250) {
+      setShowScrollDown(true);
+    } else {
+      setShowScrollDown(false);
+    }
+  }, [scrollTop]);
+
+  const chatBoxRef = useRef<HTMLDivElement>(null);
+
+  // useEffect(() => {
+  //   const tz = setInterval(() => {
+  //     console.log("zz");
+  //     if (!chatBoxRef.current) {
+  //       return;
+  //     }
+
+  //     chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+  //   }, 1000);
+
+  //   return () => clearInterval(tz);
+  // }, []);
+
   return (
     <div className="container mx-auto py-4 px-2">
       <div className="max-w-lg mx-auto bg-slate-600 rounded-lg shadow-lg">
         <div className="p-4">
           <div className="overflow-y-auto">
-            <div className="flex flex-col space-y-2">
-              <UserChat chat="안녕하세요, 요즘 날씨가 좋아서 골프하기 좋은 거 같아요!" />
+            <div
+              ref={chatBoxRef}
+              className="flex flex-col space-y-2 overflow-scroll h-[400px]"
+              style={(() => {
+                return { visibility: loading ? "hidden" : "inherit" };
+              })()}
+              onScroll={() => {
+                if (!chatBoxRef.current) {
+                  return;
+                }
+                setScrollTop(chatBoxRef.current.scrollTop);
+                // chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+                // console.log({
+                //   scrollTop: chatBoxRef.current.scrollTop,
+                //   scrollHeight: chatBoxRef.current.scrollHeight,
+                // });
+              }}
+            >
+              {dialogList.map((dialog) => {
+                if (
+                  dialog.type === "bot_answer" ||
+                  dialog.type === "bot_question"
+                ) {
+                  return (
+                    <BotChat key={dialog.insertDate} chat={dialog.sentence} />
+                  );
+                }
 
-              <BotChat chat="네 맞아요! 골프를 즐기러 나가시는 건가요?" />
-
-              <UserChat chat="네 그렇죠! 그런데 요즘 기술이 많이 발전했나요? 예전에 비해 골프장비나 기술적인게 바뀐 거 같네요?" />
-
-              <BotChat
-                chat="네 많이 바뀌었죠. 특히 클럽과 공의 디자인, 재료 등이 많이
-                    발전했고, 요즘에는 스크린 골프장과 같은 시설도 생겨났답니다."
-              />
-
-              <UserChat chat="그렇군요! 그럼 요즘 골프를 배우려면 어떻게 해야 할까요?" />
-
-              <BotChat chat="· · ·" />
-
-              {inputValue}
+                return (
+                  <UserChat key={dialog.insertDate} chat={dialog.sentence} />
+                );
+              })}
+              <span className="hidden">{inputValue}</span>
             </div>
+            {showScrollDown && (
+              <div
+                onClick={() => {
+                  if (!chatBoxRef.current) {
+                    return;
+                  }
+                  chatBoxRef.current.scrollTop =
+                    chatBoxRef.current.scrollHeight;
+                }}
+                className="w-[90%] left-[5%] top-[470px] absolute text-center text-sm rounded-lg bg-slate-700 p-1"
+              >
+                ᐯ
+              </div>
+            )}
           </div>
         </div>
       </div>
