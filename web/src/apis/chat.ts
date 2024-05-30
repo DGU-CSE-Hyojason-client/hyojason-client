@@ -24,7 +24,7 @@ export const getReply = async (question: string): Promise<string | null> => {
     const res = requester("post", apiUrl() + "/api/chatbot/reply", {
       question,
     });
-    return (await res).json();
+    return (await res).text();
   } catch (error) {
     console.log(error);
     return null;
