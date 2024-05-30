@@ -11,6 +11,8 @@ export function ChatPage() {
   const [dialogList, setDialogList] = useState<Dialog[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const chatBoxRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     getDialogList().then((data) => {
       if (!data) {
@@ -18,16 +20,20 @@ export function ChatPage() {
       }
       setDialogList(data);
 
-      if (!chatBoxRef.current) {
-        return;
-      }
-      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
-
-      setTimeout(() => {
+      const gdt = setTimeout(() => {
         setLoading(false);
       }, 200);
+
+      return () => clearTimeout(gdt);
     });
   }, [account]);
+
+  useEffect(() => {
+    if (!chatBoxRef.current) {
+      return;
+    }
+    chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+  }, [chatBoxRef.current]);
 
   useEffect(() => {
     const handleChangeInput = (event: CustomEvent) => {
@@ -75,8 +81,6 @@ export function ChatPage() {
       setShowScrollDown(false);
     }
   }, [scrollTop]);
-
-  const chatBoxRef = useRef<HTMLDivElement>(null);
 
   // useEffect(() => {
   //   const tz = setInterval(() => {
