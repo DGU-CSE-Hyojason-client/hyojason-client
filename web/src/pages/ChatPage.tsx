@@ -101,7 +101,7 @@ export function ChatPage() {
 
     const t = setTimeout(() => {
       alert("10초동안 동작하지 않았어요!");
-    }, 1000);
+    }, 10000);
 
     return () => clearTimeout(t);
   }, [chatCount, inputValue]);
