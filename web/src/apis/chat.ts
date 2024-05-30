@@ -18,3 +18,15 @@ export const getDialogList = async (): Promise<Dialog[] | null> => {
     return null;
   }
 };
+
+export const getReply = async (question: string): Promise<string | null> => {
+  try {
+    const res = requester("get", apiUrl() + "/api/chatbot/reply", {
+      question,
+    });
+    return (await res).json();
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

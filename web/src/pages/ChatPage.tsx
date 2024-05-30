@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useAccount from "../hooks/useAccount";
-import { Dialog, getDialogList } from "../apis/chat";
+import { Dialog, getDialogList, getReply } from "../apis/chat";
 
 const initialText = "Initial Text";
 
@@ -61,6 +61,40 @@ export function ChatPage() {
       return;
     }
 
+    setDialogList((before) => {
+      const last = before.at(before.length - 1);
+      const id = last ? last.id + 99 : 99;
+      return [
+        ...before,
+        {
+          id,
+          bundleId: id,
+          insertDate: Date.now().toLocaleString(),
+          sentence: inputValue,
+          type: "user_question",
+        },
+      ];
+    });
+
+    getReply(inputValue).then((answer) => {
+      if (answer) {
+        setDialogList((before) => {
+          const last = before.at(before.length - 1);
+          const id = last ? last.id + 99 : 99;
+          return [
+            ...before,
+            {
+              id,
+              bundleId: id,
+              insertDate: Date.now().toLocaleString(),
+              sentence: answer,
+              type: "bot_answer",
+            },
+          ];
+        });
+      }
+    });
+
     const t = setTimeout(() => {
       console.log("zz");
     }, 1000);
@@ -75,7 +109,7 @@ export function ChatPage() {
     if (!chatBoxRef.current) {
       return;
     }
-    if (scrollTop < 1250) {
+    if (scrollTop < chatBoxRef.current.scrollHeight - 200) {
       setShowScrollDown(true);
     } else {
       setShowScrollDown(false);
@@ -123,14 +157,10 @@ export function ChatPage() {
                   dialog.type === "bot_answer" ||
                   dialog.type === "bot_question"
                 ) {
-                  return (
-                    <BotChat key={dialog.insertDate} chat={dialog.sentence} />
-                  );
+                  return <BotChat key={dialog.id} chat={dialog.sentence} />;
                 }
 
-                return (
-                  <UserChat key={dialog.insertDate} chat={dialog.sentence} />
-                );
+                return <UserChat key={dialog.id} chat={dialog.sentence} />;
               })}
               <span className="hidden">{inputValue}</span>
             </div>
