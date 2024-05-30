@@ -109,7 +109,7 @@ export function ChatPage() {
     if (!chatBoxRef.current) {
       return;
     }
-    if (scrollTop < chatBoxRef.current.scrollHeight - 200) {
+    if (scrollTop < chatBoxRef.current.scrollHeight - 500) {
       setShowScrollDown(true);
     } else {
       setShowScrollDown(false);
