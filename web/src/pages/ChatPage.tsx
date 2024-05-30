@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useAccount from "../hooks/useAccount";
-import { Dialog, getDialogList, getReply } from "../apis/chat";
+import { Dialog, askCustom, getDialogList, getReply } from "../apis/chat";
 
 const initialText = "Initial Text";
 
@@ -56,11 +56,10 @@ export function ChatPage() {
     };
   }, []);
 
-  useEffect(() => {
-    if (inputValue === initialText) {
-      return;
-    }
-
+  function pushDialog(
+    sentence: string,
+    type: "bot_answer" | "bot_question" | "user_answer" | "user_question"
+  ) {
     setDialogList((before) => {
       const last = before.at(before.length - 1);
       const id = last ? last.id + 99 : 99;
@@ -70,29 +69,24 @@ export function ChatPage() {
           id,
           bundleId: id,
           insertDate: Date.now().toLocaleString(),
-          sentence: inputValue,
-          type: "user_question",
+          sentence,
+          type,
         },
       ];
     });
+  }
+
+  useEffect(() => {
+    if (inputValue === initialText) {
+      return;
+    }
+
+    pushDialog(inputValue, "user_question");
 
     getReply(inputValue)
       .then((answer) => {
         if (answer) {
-          setDialogList((before) => {
-            const last = before.at(before.length - 1);
-            const id = last ? last.id + 99 : 99;
-            return [
-              ...before,
-              {
-                id,
-                bundleId: id,
-                insertDate: Date.now().toLocaleString(),
-                sentence: answer,
-                type: "bot_answer",
-              },
-            ];
-          });
+          pushDialog(answer, "bot_answer");
         }
       })
       .catch((e) => {
@@ -100,7 +94,15 @@ export function ChatPage() {
       });
 
     const t = setTimeout(() => {
-      alert("10초동안 동작하지 않았어요!");
+      askCustom()
+        .then((answer) => {
+          if (answer) {
+            pushDialog(answer, "bot_question");
+          }
+        })
+        .catch((e) => {
+          alert(e);
+        });
     }, 10000);
 
     return () => clearTimeout(t);
@@ -119,19 +121,6 @@ export function ChatPage() {
       setShowScrollDown(false);
     }
   }, [scrollTop]);
-
-  // useEffect(() => {
-  //   const tz = setInterval(() => {
-  //     console.log("zz");
-  //     if (!chatBoxRef.current) {
-  //       return;
-  //     }
-
-  //     chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
-  //   }, 1000);
-
-  //   return () => clearInterval(tz);
-  // }, []);
 
   return (
     <div className="container mx-auto py-4 px-2">

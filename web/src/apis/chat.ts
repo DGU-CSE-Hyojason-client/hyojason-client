@@ -30,3 +30,13 @@ export const getReply = async (question: string): Promise<string | null> => {
     return null;
   }
 };
+
+export const askCustom = async (): Promise<string | null> => {
+  try {
+    const res = requester("get", apiUrl() + "/api/chatbot/ask/custom", {});
+    return (await res).text();
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
