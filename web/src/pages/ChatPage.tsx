@@ -33,7 +33,7 @@ export function ChatPage() {
       return;
     }
     chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
-  }, [chatBoxRef.current]);
+  }, [chatBoxRef.current, dialogList]);
 
   useEffect(() => {
     const handleChangeInput = (event: CustomEvent) => {
@@ -77,6 +77,7 @@ export function ChatPage() {
     });
 
     getReply(inputValue).then((answer) => {
+      alert(answer);
       if (answer) {
         setDialogList((before) => {
           const last = before.at(before.length - 1);
