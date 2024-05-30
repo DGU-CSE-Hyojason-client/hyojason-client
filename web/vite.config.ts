@@ -17,7 +17,10 @@ export default defineConfig({
       "/api/chat/dialogList": {
         target: "https://api.hyoja.shop",
         changeOrigin: true,
-        // rewrite: (path) => path.replace(/^\/api/, "/--/api"),
+      },
+      "/api/chatbot/reply": {
+        target: "https://api.hyoja.shop",
+        changeOrigin: true,
       },
     },
   },

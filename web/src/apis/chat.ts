@@ -21,7 +21,7 @@ export const getDialogList = async (): Promise<Dialog[] | null> => {
 
 export const getReply = async (question: string): Promise<string | null> => {
   try {
-    const res = requester("get", apiUrl() + "/api/chatbot/reply", {
+    const res = requester("post", apiUrl() + "/api/chatbot/reply", {
       question,
     });
     return (await res).json();
