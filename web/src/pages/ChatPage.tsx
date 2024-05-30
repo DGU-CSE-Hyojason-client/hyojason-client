@@ -76,25 +76,29 @@ export function ChatPage() {
       ];
     });
 
-    getReply(inputValue).then((answer) => {
-      alert(answer);
-      if (answer) {
-        setDialogList((before) => {
-          const last = before.at(before.length - 1);
-          const id = last ? last.id + 99 : 99;
-          return [
-            ...before,
-            {
-              id,
-              bundleId: id,
-              insertDate: Date.now().toLocaleString(),
-              sentence: answer,
-              type: "bot_answer",
-            },
-          ];
-        });
-      }
-    });
+    getReply(inputValue)
+      .then((answer) => {
+        alert(answer);
+        if (answer) {
+          setDialogList((before) => {
+            const last = before.at(before.length - 1);
+            const id = last ? last.id + 99 : 99;
+            return [
+              ...before,
+              {
+                id,
+                bundleId: id,
+                insertDate: Date.now().toLocaleString(),
+                sentence: answer,
+                type: "bot_answer",
+              },
+            ];
+          });
+        }
+      })
+      .catch(() => {
+        alert("!!");
+      });
 
     const t = setTimeout(() => {
       console.log("zz");
