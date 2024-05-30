@@ -78,7 +78,6 @@ export function ChatPage() {
 
     getReply(inputValue)
       .then((answer) => {
-        alert(answer);
         if (answer) {
           setDialogList((before) => {
             const last = before.at(before.length - 1);

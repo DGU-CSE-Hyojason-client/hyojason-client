@@ -103,7 +103,13 @@ export default function VoiceModule({ injectJavaScript }) {
           </Text>
         </TouchableOpacity>
         <View style={{ padding: 10 }}>
-          <Button title="보내기" onPress={() => injectJavaScript(result)} />
+          <Button
+            title="보내기"
+            onPress={() => {
+              injectJavaScript(result);
+              clear();
+            }}
+          />
         </View>
       </SafeAreaView>
       <View>
