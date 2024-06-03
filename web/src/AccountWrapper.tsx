@@ -5,15 +5,15 @@ import { login } from "./apis/account";
 import { Account, ROLE } from "./types";
 
 export const MOCK_NORMAL: Account = {
-  id: "zxc123",
-  password: "zxc123",
+  id: "user2002",
+  password: "1234",
   name: "효자손",
   role: ROLE.NORMAL,
 };
 
 export const MOCK_ADMIN: Account = {
-  id: "admin",
-  password: "admin",
+  id: "user2000",
+  password: "1234",
   name: "admin",
   role: ROLE.ADMIN,
 };
