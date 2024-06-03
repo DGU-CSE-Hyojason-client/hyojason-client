@@ -209,6 +209,7 @@ export function ChatPage() {
           </ModalBody>
           {/* @ts-ignore */}
           <ModalFooter className="bg-slate-300 rounded-b-md">
+            {/* @ts-ignore */}
             <Button
               mr={3}
               colorScheme="blue"
@@ -224,8 +225,6 @@ export function ChatPage() {
           </ModalFooter>
         </ModalContent>
       </Modal>
-      {/* @ts-ignore */}
-      <Button onClick={onOpen}>zz</Button>
     </>
   );
 }
