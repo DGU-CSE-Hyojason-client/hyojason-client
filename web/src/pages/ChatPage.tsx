@@ -1,6 +1,15 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect, useRef, useState } from "react";
 import useAccount from "../hooks/useAccount";
 import { Dialog, askCustom, getDialogList, getReply } from "../apis/chat";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  useDisclosure,
+} from "@chakra-ui/react";
 
 const initialText = "Initial Text";
 
@@ -10,6 +19,8 @@ export function ChatPage() {
   const [chatCount, setChatCount] = useState(0);
   const [dialogList, setDialogList] = useState<Dialog[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const chatBoxRef = useRef<HTMLDivElement>(null);
 
@@ -60,6 +71,11 @@ export function ChatPage() {
     sentence: string,
     type: "bot_answer" | "bot_question" | "user_answer" | "user_question"
   ) {
+    if (sentence.includes("**")) {
+      onOpen();
+      return;
+    }
+
     setDialogList((before) => {
       const last = before.at(before.length - 1);
       const id = last ? last.id + 99 : 99;
@@ -123,58 +139,94 @@ export function ChatPage() {
   }, [scrollTop]);
 
   return (
-    <div className="container mx-auto py-4 px-2">
-      <div className="max-w-lg mx-auto bg-slate-600 rounded-lg shadow-lg">
-        <div className="p-4">
-          <div className="overflow-y-auto">
-            <div
-              ref={chatBoxRef}
-              className="flex flex-col space-y-2 overflow-scroll h-[400px]"
-              style={(() => {
-                return { visibility: loading ? "hidden" : "inherit" };
-              })()}
-              onScroll={() => {
-                if (!chatBoxRef.current) {
-                  return;
-                }
-                setScrollTop(chatBoxRef.current.scrollTop);
-                // chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
-                // console.log({
-                //   scrollTop: chatBoxRef.current.scrollTop,
-                //   scrollHeight: chatBoxRef.current.scrollHeight,
-                // });
-              }}
-            >
-              {dialogList.map((dialog) => {
-                if (
-                  dialog.type === "bot_answer" ||
-                  dialog.type === "bot_question"
-                ) {
-                  return <BotChat key={dialog.id} chat={dialog.sentence} />;
-                }
-
-                return <UserChat key={dialog.id} chat={dialog.sentence} />;
-              })}
-              <span className="hidden">{inputValue}</span>
-            </div>
-            {showScrollDown && (
+    <>
+      <div className="container mx-auto py-4 px-2">
+        <div className="max-w-lg mx-auto bg-slate-600 rounded-lg shadow-lg">
+          <div className="p-4">
+            <div className="overflow-y-auto">
               <div
-                onClick={() => {
+                ref={chatBoxRef}
+                className="flex flex-col space-y-2 overflow-scroll h-[400px]"
+                style={(() => {
+                  return { visibility: loading ? "hidden" : "inherit" };
+                })()}
+                onScroll={() => {
                   if (!chatBoxRef.current) {
                     return;
                   }
-                  chatBoxRef.current.scrollTop =
-                    chatBoxRef.current.scrollHeight;
+                  setScrollTop(chatBoxRef.current.scrollTop);
+                  // chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+                  // console.log({
+                  //   scrollTop: chatBoxRef.current.scrollTop,
+                  //   scrollHeight: chatBoxRef.current.scrollHeight,
+                  // });
                 }}
-                className="w-[90%] left-[5%] top-[470px] absolute text-center text-sm rounded-lg bg-slate-700 p-1"
               >
-                ᐯ
+                {dialogList.map((dialog) => {
+                  if (
+                    dialog.type === "bot_answer" ||
+                    dialog.type === "bot_question"
+                  ) {
+                    return <BotChat key={dialog.id} chat={dialog.sentence} />;
+                  }
+
+                  return <UserChat key={dialog.id} chat={dialog.sentence} />;
+                })}
+                <span className="hidden">{inputValue}</span>
               </div>
-            )}
+              {showScrollDown && (
+                <div
+                  onClick={() => {
+                    if (!chatBoxRef.current) {
+                      return;
+                    }
+                    chatBoxRef.current.scrollTop =
+                      chatBoxRef.current.scrollHeight;
+                  }}
+                  className="w-[90%] left-[5%] top-[470px] absolute text-center text-sm rounded-lg bg-slate-700 p-1"
+                >
+                  ᐯ
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <Modal
+        size="xs"
+        isCentered
+        isOpen={isOpen}
+        onClose={onClose}
+        scrollBehavior="inside"
+      >
+        {/* @ts-ignore */}
+        <ModalContent>
+          {/* @ts-ignore */}
+          <ModalBody className="bg-slate-300 rounded-t-md text-center">
+            <p>그룹핑 서비스를 이용하시겠어요?</p>
+            <p>비슷한 관심사를 가진 분들을 </p>
+            <p>만날 수 있겠네요!</p>
+          </ModalBody>
+          {/* @ts-ignore */}
+          <ModalFooter className="bg-slate-300 rounded-b-md">
+            <Button
+              mr={3}
+              colorScheme="blue"
+              onClick={() => {
+                location.href = "/matching";
+              }}
+            >
+              네
+            </Button>
+            <Button onClick={onClose} colorScheme="gray">
+              아니요
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      {/* @ts-ignore */}
+      <Button onClick={onOpen}>zz</Button>
+    </>
   );
 }
 
