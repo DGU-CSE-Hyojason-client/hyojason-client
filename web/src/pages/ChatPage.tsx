@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect, useRef, useState } from "react";
 import ElderSvg from "../assets/icons/elder.svg?react";
+import BotSvg from "../assets/icons/bot.svg?react";
 import useAccount from "../hooks/useAccount";
 import { Dialog, askCustom, getDialogList, getReply } from "../apis/chat";
 import {
@@ -227,7 +228,7 @@ export function ChatPage() {
 function BotChat({ chat }: { chat: string }) {
   return (
     <div className="flex items-center">
-      <ElderSvg className="w-4 h-4" />
+      <BotSvg className="w-10 h-10" />
       <div className="ml-2 bg-slate-400 rounded-lg p-2">
         <p className="text-md text-slate-800">{chat}</p>
       </div>
@@ -241,7 +242,7 @@ function UserChat({ chat }: { chat: string }) {
       <div className="mr-2 bg-slate-100 rounded-lg p-2">
         <p className="text-md text-slate-800">{chat}</p>
       </div>
-      <ElderSvg className="w-4 h-4" />
+      <ElderSvg className="w-10 h-10" />
     </div>
   );
 }
