@@ -4,7 +4,7 @@ import { apiUrl } from "./match";
 export type Dialog = {
   id: number;
   insertDate: string;
-  type: "bot_answer" | "bot_question" | "user_answer" | "user_question";
+  type: "assistant" | "user";
   sentence: string;
   bundleId: number;
 };

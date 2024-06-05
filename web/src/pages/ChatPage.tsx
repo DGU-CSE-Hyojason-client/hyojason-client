@@ -68,10 +68,7 @@ export function ChatPage() {
     };
   }, []);
 
-  function pushDialog(
-    sentence: string,
-    type: "bot_answer" | "bot_question" | "user_answer" | "user_question"
-  ) {
+  function pushDialog(sentence: string, type: "assistant" | "user") {
     if (sentence.includes("**")) {
       onOpen();
       return;
@@ -98,12 +95,12 @@ export function ChatPage() {
       return;
     }
 
-    pushDialog(inputValue, "user_question");
+    pushDialog(inputValue, "user");
 
     getReply(inputValue)
       .then((answer) => {
         if (answer) {
-          pushDialog(answer, "bot_answer");
+          pushDialog(answer, "assistant");
         }
       })
       .catch((e) => {
@@ -114,7 +111,7 @@ export function ChatPage() {
       askCustom()
         .then((answer) => {
           if (answer) {
-            pushDialog(answer, "bot_question");
+            pushDialog(answer, "assistant");
           }
         })
         .catch((e) => {
@@ -164,10 +161,7 @@ export function ChatPage() {
                 }}
               >
                 {dialogList.map((dialog) => {
-                  if (
-                    dialog.type === "bot_answer" ||
-                    dialog.type === "bot_question"
-                  ) {
+                  if (dialog.type === "assistant") {
                     return <BotChat key={dialog.id} chat={dialog.sentence} />;
                   }
 
