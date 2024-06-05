@@ -141,6 +141,10 @@ export default function App() {
     webviewRef.current.injectJavaScript(script);
   };
 
+  const handleNavigation = (route) => {
+    webviewRef.current.postMessage(JSON.stringify({ route }));
+  };
+
   return (
     // <View
     //   style={{ flex: 1, alignItems: "center", justifyContent: "space-around" }}
@@ -176,11 +180,14 @@ export default function App() {
         style={styles.container}
         originWhitelist={["*"]}
         source={{
-          uri: `${
-            process.env.EXPO_PUBLIC_WEBVIEW_URL || "https://hyoja.shop"
-          }${here}`,
+          uri: `${process.env.EXPO_PUBLIC_WEBVIEW_URL || "https://hyoja.shop"}`,
         }}
         javaScriptEnabled={true}
+        onMessage={(event) => {
+          const { data } = event.nativeEvent;
+          const message = JSON.parse(data);
+          console.log(message);
+        }}
       />
       <View
         style={{
@@ -197,8 +204,8 @@ export default function App() {
           style={{
             backgroundColor: "#1E293B",
             display: "flex",
-            paddingRight: 16,
-            paddingLeft: 16,
+            paddingRight: 64,
+            paddingLeft: 64,
             paddingTop: 8,
             paddingBottom: 8,
             borderTopLeftRadius: 8,
@@ -224,6 +231,7 @@ export default function App() {
                   style={{ padding: 4 }}
                   onPress={() => {
                     setHere(to);
+                    handleNavigation(to);
                   }}
                 >
                   <View
