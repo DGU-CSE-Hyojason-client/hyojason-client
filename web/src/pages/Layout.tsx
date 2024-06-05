@@ -7,15 +7,19 @@ export function Layout() {
   const history = useNavigate();
 
   useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
+    const receiver = navigator.userAgent.includes("Android")
+      ? document
+      : window;
+
+    const handleMessage = (event: any) => {
       const { route } = JSON.parse(event.data);
       history(route);
     };
 
-    window.addEventListener("message", handleMessage);
+    receiver.addEventListener("message", handleMessage);
 
     return () => {
-      window.removeEventListener("message", handleMessage);
+      receiver.removeEventListener("message", handleMessage);
     };
   }, [history]);
 
