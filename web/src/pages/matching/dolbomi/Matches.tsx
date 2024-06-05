@@ -94,17 +94,17 @@ export default function Matches({ account }: { account: Account }) {
 
   return (
     <div className="flex flex-col gap-3 text-black">
-      <div className="flex flex-col gap-2 bg-[#e5be8f] rounded-md p-2">
+      <div className="flex flex-col gap-2 bg-[#f3eee8] rounded-md p-2">
         <div>그룹 id: {selectedGroup.groupId}</div>
         <div>키워드: {selectedGroup.keywordsList.join(" · ")}</div>
         <div>인원: {selectedGroup.memberNum}</div>
       </div>
-      <div className="flex flex-col gap-2 bg-[#e5be8f] rounded-md p-2">
+      <div className="flex flex-col gap-2 bg-[#f3eee8] rounded-md p-2">
         <div>매칭된 사용자</div>
-        <div className="flex flex-col bg-[#e5be8f] p-2 rounded-md gap-2">
+        <div className="flex flex-col bg-[#f3eee8] p-2 rounded-md gap-2">
           {groupDetail?.userList.map((user) => (
             <div
-              className="bg-[#f3eee8] rounded-md p-2 flex gap-2"
+              className="bg-[#e5be8f] rounded-md p-2 flex gap-2"
               key={user.id}
             >
               <span>
@@ -115,7 +115,7 @@ export default function Matches({ account }: { account: Account }) {
         </div>
       </div>
       <button
-        className="bg-[#e5be8f] rounded-md p-2 px-1"
+        className="bg-[#f3eee8] rounded-md p-2 px-1"
         onClick={() => setSelectedGroup(null)}
       >
         이전
