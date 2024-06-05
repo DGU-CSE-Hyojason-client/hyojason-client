@@ -197,7 +197,7 @@ export default function App() {
               iconName,
             }))
             .map(({ to, name, Icon, iconName }, i) => {
-              const color = to === here ? "#ffffff" : "#909090";
+              const color = to === here ? "#242424" : "#909090";
               const size = name === "매칭" ? 15 : 20;
               return (
                 <TouchableOpacity

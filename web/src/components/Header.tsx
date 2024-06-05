@@ -28,8 +28,7 @@ export default function Header() {
   return (
     <div className="flex items-center justify-between bg-slate-800 p-3 font-extralight text-3xl">
       <div className="flex gap-1 items-center">
-        <img src="logo.png" className="w-10 h-10 mr-2" />
-        <span>효자손</span>
+        <img src="logo.png" className="w-14 h-14 mr-2" />
       </div>
 
       <select

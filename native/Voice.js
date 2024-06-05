@@ -59,7 +59,7 @@ export default function VoiceModule({ injectJavaScript }) {
   return (
     <View
       style={{
-        backgroundColor: "#10172A",
+        backgroundColor: "#fef9f7",
       }}
     >
       <SafeAreaView
@@ -69,7 +69,6 @@ export default function VoiceModule({ injectJavaScript }) {
           display: "flex",
           flexDirection: "row",
           gap: 16,
-          backgroundColor: "white",
         }}
       >
         <View>
@@ -81,8 +80,8 @@ export default function VoiceModule({ injectJavaScript }) {
               flex: 1,
               width: 200,
               height: "100%",
-              backgroundColor: "white",
               padding: 8,
+              backgroundColor: "#f3eee8",
               fontSize: 20,
             }}
             onChangeText={(text) => setResult(text)}
@@ -92,8 +91,8 @@ export default function VoiceModule({ injectJavaScript }) {
         <TouchableOpacity onPress={clear}>
           <Text
             style={{
-              backgroundColor: "#1E293B",
-              color: "#909090",
+              backgroundColor: "#a39e98",
+              color: "white",
               padding: 8,
               borderRadius: 20,
               fontSize: 20,
@@ -150,7 +149,7 @@ export default function VoiceModule({ injectJavaScript }) {
               }}
               name="mic-none"
               size={48}
-              color="#909090"
+              color="white"
             />
           )}
         </TouchableOpacity>
