@@ -38,17 +38,21 @@ export const getElderGroupStatus = async (): Promise<
 export type Group = {
   groupId: number;
   memberNum: number;
-  keyword: string[];
+  keyword: string[] | null;
+  keywordsList: string[];
+  users: User[];
 };
 
 export type GroupDetail = {
   userList: User[];
 };
 
-export type CaregiverGroupStatusResult = {
-  groupList: Group[];
-  users: User[];
-};
+// export type CaregiverGroupStatusResult = {
+//   groupList: Group[];
+//   users: User[];
+// };
+export type CaregiverGroupStatusResult = Group[];
+
 export const getCaregiverGroupStatus =
   async (): Promise<CaregiverGroupStatusResult | null> => {
     try {

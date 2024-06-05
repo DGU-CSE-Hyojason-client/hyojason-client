@@ -17,8 +17,8 @@ import ChatIcon from "@expo/vector-icons/Ionicons";
 import VoiceModule from "./Voice";
 
 const route = [
-  { name: "홈", path: "/", Icon: HomeIcon, iconName: "home-variant" },
   { name: "매칭", path: "/matching", Icon: GroupIcon, iconName: "user-group" },
+  { name: "홈", path: "/", Icon: HomeIcon, iconName: "home-variant" },
   {
     name: "채팅",
     path: "/chat",
@@ -27,11 +27,13 @@ const route = [
   },
 ];
 
-const routeItems =
-  route.length > 5
-    ? route
-    : // @ts-expect-error ts-ignore
-      route.concat(Array.from({ length: 5 - route.length }).fill(route[0]));
+// const routeItems =
+//   route.length > 5
+//     ? route
+//     : // @ts-expect-error ts-ignore
+//       route.concat(Array.from({ length: 5 - route.length }).fill(route[0]));
+
+const routeItems = route;
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({

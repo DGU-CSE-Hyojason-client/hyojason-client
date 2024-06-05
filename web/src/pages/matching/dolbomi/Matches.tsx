@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import { Account, User } from "../../../types";
+import { Account } from "../../../types";
 import {
   Group,
   GroupDetail,
   getCaregiverGroupStatus,
-  getGroupDetail,
 } from "../../../apis/match";
 
 export default function Matches({ account }: { account: Account }) {
   const [groupList, setGroupList] = useState<Group[]>([]);
-  const [users, setUsers] = useState<User[]>([]);
+  // const [users, setUsers] = useState<User[]>([]);
   const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
   const [groupDetail, setGroupDetail] = useState<GroupDetail | null>(null);
 
@@ -17,8 +16,8 @@ export default function Matches({ account }: { account: Account }) {
     getCaregiverGroupStatus().then((data) => {
       if (data) {
         console.log(data);
-        setGroupList(data.groupList);
-        setUsers(data.users);
+        setGroupList(data);
+        // setUsers(data.users);
       }
     });
   }, []);
@@ -28,8 +27,12 @@ export default function Matches({ account }: { account: Account }) {
       return;
     }
 
-    getGroupDetail(selectedGroup?.groupId).then((data) => {
-      setGroupDetail(data);
+    // getGroupDetail(selectedGroup?.groupId).then((data) => {
+    //   setGroupDetail(data);
+    // });
+
+    setGroupDetail({
+      userList: selectedGroup.users,
     });
   }, [selectedGroup]);
 
@@ -44,37 +47,43 @@ export default function Matches({ account }: { account: Account }) {
           <div className="flex flex-col gap-2 bg-slate-800 rounded-md p-2">
             <span>매칭 큐</span>
             <div className="flex gap-2 text-sm flex-wrap">
-              {users.map((user) => (
+              {/* {users.map((user) => (
                 <span
                   key={user.id}
                   className="bg-slate-700 text-center p-1 px-2 rounded-full w-20 text-nowrap"
                 >
                   {user.name}
                 </span>
-              ))}
+              ))} */}
             </div>
           </div>
           <div className="flex flex-col bg-slate-800 p-2 rounded-md gap-2">
             <span>매칭 완료 그룹</span>
-            {groupList.map(({ groupId, keyword, memberNum }) => (
+            {groupList.map(({ groupId, keywordsList, users }) => (
               <div
                 className="bg-slate-700 rounded-md p-2 flex justify-between"
                 onClick={() =>
-                  setSelectedGroup({ groupId, keyword, memberNum })
+                  setSelectedGroup({
+                    groupId,
+                    keyword: [],
+                    keywordsList,
+                    memberNum: 5,
+                    users,
+                  })
                 }
                 key={groupId}
               >
                 <span>id: {groupId}</span>
                 <div className="flex gap-2 text-sm">
-                  {/* {keyword.map((k, i) => (
+                  {users.map((user) => (
                     <span
                       className="flex px-1 items-center bg-slate-800 rounded-md"
-                      key={`${k}-${i}`}
+                      key={user.id}
                     >
-                      {k}
+                      {user.name}
                     </span>
-                  ))} */}
-                  {keyword.join(" · ")}
+                  ))}
+                  {keywordsList.join(" · ")}
                 </div>
               </div>
             ))}
