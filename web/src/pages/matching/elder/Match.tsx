@@ -28,7 +28,7 @@ export default function Match({ account }: { account: Account }) {
 
       {status === "idle" && (
         <button
-          className="bg-slate-800 rounded-md p-2 px-1"
+          className="bg-[#f3eee8] rounded-md p-2 px-1"
           onClick={async () => {
             await postElderGroupApply();
             setStatus("ongoing");
@@ -38,7 +38,7 @@ export default function Match({ account }: { account: Account }) {
         </button>
       )}
       {status === "ongoing" && (
-        <button className="bg-slate-800 rounded-md p-2 px-1">
+        <button className="bg-[#f3eee8] rounded-md p-2 px-1">
           매칭중입니다...
         </button>
       )}

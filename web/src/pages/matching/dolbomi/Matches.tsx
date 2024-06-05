@@ -44,7 +44,7 @@ export default function Matches({ account }: { account: Account }) {
         </span>
 
         <div className="flex flex-col gap-3 text-slate-200">
-          <div className="flex flex-col gap-2 bg-slate-800 rounded-md p-2">
+          <div className="flex flex-col gap-2 bg-[#f3eee8] rounded-md p-2">
             <span>매칭 큐</span>
             <div className="flex gap-2 text-sm flex-wrap">
               {/* {users.map((user) => (
@@ -57,7 +57,7 @@ export default function Matches({ account }: { account: Account }) {
               ))} */}
             </div>
           </div>
-          <div className="flex flex-col bg-slate-800 p-2 rounded-md gap-2">
+          <div className="flex flex-col bg-[#f3eee8] p-2 rounded-md gap-2">
             <span>매칭 완료 그룹</span>
             {groupList.map(({ groupId, keywordsList, users }) => (
               <div

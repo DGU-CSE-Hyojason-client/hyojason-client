@@ -174,7 +174,7 @@ export function ChatPage() {
                     chatBoxRef.current.scrollTop =
                       chatBoxRef.current.scrollHeight;
                   }}
-                  className="w-[90%] left-[5%] top-[470px] absolute text-center text-sm rounded-lg bg-slate-700 p-1"
+                  className="w-[90%] left-[5%] top-[470px] absolute text-center text-sm rounded-lg bg-[#a39e98] p-1"
                 >
                   ᐯ
                 </div>
@@ -236,7 +236,7 @@ function BotChat({ chat }: { chat: string }) {
 function UserChat({ chat }: { chat: string }) {
   return (
     <div className="flex items-center justify-end">
-      <div className="mr-2 bg-[fef9f7] rounded-lg p-2">
+      <div className="mr-2 bg-[#fef9f7] rounded-lg p-2">
         <p className="text-md text-slate-800">{chat}</p>
       </div>
       <div className="w-10 h-10">
