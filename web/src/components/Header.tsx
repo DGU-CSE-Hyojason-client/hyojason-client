@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import Icon from "../assets/icons/hand_love.svg?react";
 import useAccount from "../hooks/useAccount";
 import { login } from "../apis/account";
 import { Account, ROLE } from "../types";
@@ -29,8 +28,8 @@ export default function Header() {
   return (
     <div className="flex items-center justify-between bg-slate-800 p-3 font-extralight text-3xl">
       <div className="flex gap-1 items-center">
-        <Icon className="w-10 h-10" />
-        <span>hyojason</span>
+        <img src="logo.png" className="w-10 h-10 mr-2" />
+        <span>효자손</span>
       </div>
 
       <select
