@@ -45,7 +45,7 @@ export default function Matches({ account }: { account: Account }) {
 
         <div className="flex flex-col gap-3 text-slate-200">
           <div className="flex flex-col gap-2 bg-[#f3eee8] rounded-md p-2">
-            <span>매칭 큐</span>
+            <span className="text-black">매칭 큐</span>
             <div className="flex gap-2 text-sm flex-wrap">
               {/* {users.map((user) => (
                 <span
@@ -58,10 +58,10 @@ export default function Matches({ account }: { account: Account }) {
             </div>
           </div>
           <div className="flex flex-col bg-[#f3eee8] p-2 rounded-md gap-2">
-            <span>매칭 완료 그룹</span>
+            <span className="text-black">매칭 완료 그룹</span>
             {groupList.map(({ groupId, keywordsList, users }) => (
               <div
-                className="bg-slate-700 rounded-md p-2 flex justify-between"
+                className="bg-[#e5be8f] rounded-md p-2 flex justify-between text-black"
                 onClick={() =>
                   setSelectedGroup({
                     groupId,
@@ -76,7 +76,7 @@ export default function Matches({ account }: { account: Account }) {
                 <div className="flex gap-2 text-xs">
                   {users.map((user) => (
                     <span
-                      className="flex px-1 items-center bg-slate-800 rounded-md"
+                      className="flex px-1 items-center bg-[#f3eee8] rounded-md"
                       key={user.id}
                     >
                       {user.name}
