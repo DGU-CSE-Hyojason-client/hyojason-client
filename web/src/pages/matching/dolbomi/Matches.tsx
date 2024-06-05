@@ -82,8 +82,8 @@ export default function Matches({ account }: { account: Account }) {
                       {user.name}
                     </span>
                   ))}
-                  {keywordsList.join(" · ")}
                 </div>
+                {keywordsList.join(" · ")}
               </div>
             ))}
           </div>
