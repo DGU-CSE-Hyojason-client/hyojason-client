@@ -26,13 +26,13 @@ export default function Header() {
   }, [account, id, name, role, setAccount]);
 
   return (
-    <div className="flex items-center justify-between bg-slate-800 p-3 font-extralight text-3xl">
+    <div className="flex items-center justify-between bg-[#F3EEE8] p-3 font-extralight text-3xl">
       <div className="flex gap-1 items-center">
         <img src="logo.png" className="w-14 h-14 mr-2" />
       </div>
 
       <select
-        className="w-24 bg-slate-700 rounded-md text-sm p-1"
+        className="w-24 bg-slate-300 rounded-md text-sm p-1 text-black"
         value={role}
         onChange={(e) => {
           if (e.target.value === ROLE.NORMAL) {

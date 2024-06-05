@@ -177,7 +177,7 @@ export default function App() {
         )}
         <View
           style={{
-            backgroundColor: "#fef9f7",
+            backgroundColor: "#F3EEE8",
             display: "flex",
             paddingRight: 64,
             paddingLeft: 64,

@@ -140,7 +140,7 @@ export function ChatPage() {
   return (
     <>
       <div className="container mx-auto py-4 px-2">
-        <div className="max-w-lg mx-auto bg-slate-600 rounded-lg shadow-lg">
+        <div className="max-w-lg mx-auto bg-[#f3eee8] rounded-lg shadow-lg">
           <div className="p-4">
             <div className="overflow-y-auto">
               <div
@@ -154,11 +154,6 @@ export function ChatPage() {
                     return;
                   }
                   setScrollTop(chatBoxRef.current.scrollTop);
-                  // chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
-                  // console.log({
-                  //   scrollTop: chatBoxRef.current.scrollTop,
-                  //   scrollHeight: chatBoxRef.current.scrollHeight,
-                  // });
                 }}
               >
                 {dialogList.map((dialog) => {
@@ -228,8 +223,10 @@ export function ChatPage() {
 function BotChat({ chat }: { chat: string }) {
   return (
     <div className="flex items-center">
-      <BotSvg className="w-10 h-10" />
-      <div className="ml-2 bg-slate-400 rounded-lg p-2">
+      <div className="w-10 h-10">
+        <BotSvg className="w-10 h-10" />
+      </div>
+      <div className="ml-2 bg-[#fef9f7] rounded-lg p-2">
         <p className="text-md text-slate-800">{chat}</p>
       </div>
     </div>
@@ -239,10 +236,12 @@ function BotChat({ chat }: { chat: string }) {
 function UserChat({ chat }: { chat: string }) {
   return (
     <div className="flex items-center justify-end">
-      <div className="mr-2 bg-slate-100 rounded-lg p-2">
+      <div className="mr-2 bg-[fef9f7] rounded-lg p-2">
         <p className="text-md text-slate-800">{chat}</p>
       </div>
-      <ElderSvg className="w-10 h-10" />
+      <div className="w-10 h-10">
+        <ElderSvg className="w-10 h-10" />
+      </div>
     </div>
   );
 }
