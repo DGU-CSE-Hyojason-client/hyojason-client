@@ -32,7 +32,7 @@ export default function Header() {
       </div>
 
       <select
-        className="w-24 bg-slate-300 rounded-md text-sm p-1 text-black"
+        className="w-24 bg-[#e5be8f] rounded-md text-sm p-1 text-black"
         value={role}
         onChange={(e) => {
           if (e.target.value === ROLE.NORMAL) {
