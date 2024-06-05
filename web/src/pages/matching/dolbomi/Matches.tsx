@@ -93,13 +93,13 @@ export default function Matches({ account }: { account: Account }) {
   }
 
   return (
-    <div className="flex flex-col gap-3 text-slate-400">
-      <div className="flex flex-col gap-2 bg-slate-800 rounded-md p-2">
+    <div className="flex flex-col gap-3 text-black">
+      <div className="flex flex-col gap-2 bg-[#e5be8f] rounded-md p-2">
         id: {selectedGroup.groupId}
-        <div className="flex flex-col bg-slate-800 p-2 rounded-md gap-2">
+        <div className="flex flex-col bg-[#e5be8f] p-2 rounded-md gap-2">
           {groupDetail?.userList.map((user) => (
             <div
-              className="bg-slate-700 rounded-md p-2 flex gap-2"
+              className="bg-[#f3eee8] rounded-md p-2 flex gap-2"
               key={user.id}
             >
               <span>{user.name}</span>
@@ -108,7 +108,7 @@ export default function Matches({ account }: { account: Account }) {
         </div>
       </div>
       <button
-        className="bg-slate-800 rounded-md p-2 px-1"
+        className="bg-[#e5be8f] rounded-md p-2 px-1"
         onClick={() => setSelectedGroup(null)}
       >
         이전
