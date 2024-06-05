@@ -8,7 +8,7 @@ export function Layout() {
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      const { route } = event.data;
+      const { route } = JSON.parse(event.data);
       history(route);
     };
 

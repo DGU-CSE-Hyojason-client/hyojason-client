@@ -142,6 +142,7 @@ export default function App() {
   };
 
   const handleNavigation = (route) => {
+    console.log({ route });
     webviewRef.current.postMessage(JSON.stringify({ route }));
   };
 
