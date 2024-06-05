@@ -73,16 +73,15 @@ export default function Matches({ account }: { account: Account }) {
                 }
                 key={groupId}
               >
-                <span>id: {groupId}</span>
-                <div className="flex gap-2 text-sm">
-                  {/* {users.map((user) => (
+                <div className="flex gap-2 text-xs">
+                  {users.map((user) => (
                     <span
                       className="flex px-1 items-center bg-slate-800 rounded-md"
                       key={user.id}
                     >
                       {user.name}
                     </span>
-                  ))} */}
+                  ))}
                   {keywordsList.join(" · ")}
                 </div>
               </div>
