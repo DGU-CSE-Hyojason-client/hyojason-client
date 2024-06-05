@@ -21,7 +21,7 @@ export default function Match({ account }: { account: Account }) {
   }, []);
 
   return (
-    <div className="flex flex-col gap-2 text-slate-200">
+    <div className="flex flex-col gap-2 text-black">
       <span className="hidden">
         {account.name}: {account.role}
       </span>
