@@ -98,6 +98,8 @@ export default function Matches({ account }: { account: Account }) {
         <div>그룹 id: {selectedGroup.groupId}</div>
         <div>키워드: {selectedGroup.keywordsList.join(" · ")}</div>
         <div>인원: {selectedGroup.memberNum}</div>
+      </div>
+      <div className="flex flex-col gap-2 bg-[#e5be8f] rounded-md p-2">
         <div>매칭된 사용자</div>
         <div className="flex flex-col bg-[#e5be8f] p-2 rounded-md gap-2">
           {groupDetail?.userList.map((user) => (
