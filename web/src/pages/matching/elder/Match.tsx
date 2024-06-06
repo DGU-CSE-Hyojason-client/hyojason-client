@@ -7,12 +7,14 @@ export default function Match({ account }: { account: Account }) {
   const [status, setStatus] = useState<
     "idle" | "ongoing" | "finish" | undefined
   >(undefined);
+  const [res, setRes] = useState<any>();
 
   function get() {
     getElderGroupStatus().then((data) => {
       console.log(data);
       if (data) {
         setStatus(data.status);
+        setRes(data);
       }
     });
   }
@@ -39,11 +41,21 @@ export default function Match({ account }: { account: Account }) {
         </button>
       )}
       {status === "ongoing" && (
-        <button className="bg-[#f3eee8] rounded-md p-2 px-1">
-          매칭중입니다...
-        </button>
+        <>
+          <button className="bg-[#f3eee8] rounded-md p-2 px-1">
+            매칭중입니다...
+          </button>
+          <div>
+            <div>{JSON.stringify(res)}</div>
+          </div>
+        </>
       )}
-      {/*{status === "finish" && <MatchResult match={} />}*/}
+      {status === "finish" && (
+        <>
+          <div>매칭이 완료되었습니다.</div>
+          {/*<MatchResult match={} />*/}
+        </>
+      )}
     </div>
   );
 }
