@@ -25,7 +25,7 @@ export function HomePage() {
                 <ElderManIcon className="w-full h-20" />
               </div>
               <div className="text-xs">
-                <div>오상철</div>
+                <div>김수현</div>
                 <div>나이: 60</div>
                 <div>지역: 송파구</div>
                 <div>전화번호: 010-3412-3490</div>
@@ -36,7 +36,7 @@ export function HomePage() {
                 <ElderWomanIcon className="w-full h-20" />
               </div>
               <div className="text-xs">
-                <div>김정숙</div>
+                <div>윤기자</div>
                 <div>나이: 56</div>
                 <div>지역: 송파구</div>
                 <div>전화번호: 010-4123-0075</div>
@@ -44,10 +44,10 @@ export function HomePage() {
             </div>
             <div className="flex flex-col text-lg bg-[#fff] p-4 gap-2">
               <div className="h-20">
-                <ElderWomanIcon className="w-full h-20" />
+                <ElderManIcon className="w-full h-20" />
               </div>
               <div className="text-xs">
-                <div>이영희</div>
+                <div>오기수</div>
                 <div>나이: 64</div>
                 <div>지역: 송파구</div>
                 <div>전화번호: 010-1234-5678</div>
@@ -55,10 +55,10 @@ export function HomePage() {
             </div>
             <div className="flex flex-col text-lg bg-[#fff] p-4 gap-2">
               <div className="h-20">
-                <ElderManIcon className="w-full h-20" />
+                <ElderWomanIcon className="w-full h-20" />
               </div>
               <div className="text-xs">
-                <div>최영수</div>
+                <div>박수영</div>
                 <div>나이: 58</div>
                 <div>지역: 송파구</div>
                 <div>전화번호: 010-5324-8076</div>
@@ -66,10 +66,10 @@ export function HomePage() {
             </div>
             <div className="flex flex-col text-lg bg-[#fff] p-4 gap-2">
               <div className="h-20">
-                <ElderWomanIcon className="w-full h-20" />
+                <ElderManIcon className="w-full h-20" />
               </div>
               <div className="text-xs">
-                <div>박정자</div>
+                <div>황정수</div>
                 <div>나이: 58</div>
                 <div>지역: 송파구</div>
                 <div>전화번호: 010-3412-5674</div>
