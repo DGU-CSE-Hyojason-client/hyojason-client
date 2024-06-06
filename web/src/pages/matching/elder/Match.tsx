@@ -64,10 +64,11 @@ export default function Match({ account }: { account: Account }) {
               {res?.memberList.map((v: string, i: number) => (
                 <div
                   key={i}
-                  className="flex flex-col text-2xl bg-[#fff] p-4 gap-2 rounded-md"
+                  className="flex text-2xl bg-[#fff] p-2 gap-2 rounded-md"
                 >
-                  {i % 2 == 0 ? <ElderManIcon /> : <ElderWomanIcon />}
-
+                  <span>
+                    {i % 2 == 0 ? <ElderManIcon /> : <ElderWomanIcon />}
+                  </span>
                   {v}
                 </div>
               ))}
@@ -79,7 +80,7 @@ export default function Match({ account }: { account: Account }) {
               {res?.keyword.map((v: string, i: number) => (
                 <div
                   key={i}
-                  className="flex flex-col text-2xl bg-[#fff] p-4 gap-2 rounded-md"
+                  className="flex flex-col text-2xl bg-[#fff] p-2 gap-2 rounded-md"
                 >
                   {v}
                 </div>
