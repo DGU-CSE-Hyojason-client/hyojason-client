@@ -1,4 +1,5 @@
 import { Account, ROLE } from "../types.ts";
+import useAccount from "../hooks/useAccount.ts";
 
 const accounts_normal: { [key in string]: Account } = {
   user1: {
@@ -31,8 +32,12 @@ const accounts_admin: { [key in string]: Account } = {
 };
 
 export default function ConfigPage() {
+  //@ts-ignore
+  const { account, id, name, role, setRole, setAccount } = useAccount();
+
   return (
     <div className="p-2">
+      <div>현재 유저: {account?.id}</div>
       <h1>노인</h1>
       {Object.entries(accounts_normal).map(([key, value]) => (
         <div key={key} className="flex gap-2">
