@@ -33,7 +33,7 @@ export default function Match({ account }: { account: Account }) {
 
       {status === "idle" && (
         <button
-          className="bg-[#f3eee8] rounded-md p-2 px-1"
+          className="bg-[#f3eee8] rounded-md p-2 px-1 text-lg"
           onClick={async () => {
             await getElderGroupApply();
             setStatus("ongoing");
@@ -44,10 +44,10 @@ export default function Match({ account }: { account: Account }) {
       )}
       {status === "ongoing" && (
         <>
-          <button className="bg-[#f3eee8] rounded-md p-2 px-1">
+          <button className="bg-[#f3eee8] rounded-md p-2 px-1 text-lg">
             그룹 형성 중입니다..
           </button>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 text-lg">
             <div>{res.regionId}</div>
             <div>유저 수: {res.applicant}</div>
           </div>
