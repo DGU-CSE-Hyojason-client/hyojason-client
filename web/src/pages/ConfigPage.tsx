@@ -1,16 +1,16 @@
 import { Account, ROLE } from "../types.ts";
 
 const accounts_normal: { [key in string]: Account } = {
-  user2002: {
-    id: "user2",
-    password: "1234",
-    name: "user2",
-    role: ROLE.NORMAL,
-  },
   user1: {
     id: "user1",
     password: "1234",
     name: "user1",
+    role: ROLE.NORMAL,
+  },
+  user2: {
+    id: "user2",
+    password: "1234",
+    name: "user2",
     role: ROLE.NORMAL,
   },
 };
