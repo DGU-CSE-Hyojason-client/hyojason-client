@@ -24,7 +24,7 @@ export function Layout() {
   }, [history]);
 
   return (
-    <div className="flex flex-col w-full h-screen bg-[#FDF9F6] text-white">
+    <div className="flex flex-col w-full h-screen bg-[#FDF9F6]">
       <Header />
       <div className="flex grow overflow-hidden">
         <div className="h-full w-full overflow-auto">

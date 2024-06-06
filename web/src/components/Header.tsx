@@ -3,10 +3,11 @@ import useAccount from "../hooks/useAccount";
 import { login } from "../apis/account";
 import { Account, ROLE } from "../types";
 import { MOCK_ADMIN, MOCK_NORMAL } from "../AccountWrapper";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const { account, id, name, role, setRole, setAccount } = useAccount();
-
+  const history = useNavigate();
   useEffect(() => {
     if (!account) {
       return;
@@ -15,7 +16,12 @@ export default function Header() {
     let ac: Account;
 
     if (role === ROLE.NORMAL) {
-      ac = MOCK_NORMAL;
+      const local = localStorage.getItem("account_normal");
+      if (local) {
+        ac = JSON.parse(local);
+      } else {
+        ac = MOCK_NORMAL;
+      }
     } else {
       ac = MOCK_ADMIN;
     }
@@ -30,6 +36,15 @@ export default function Header() {
       <div className="flex gap-1 items-center">
         <img src="logo.png" className="w-14 h-14 mr-2" />
       </div>
+
+      <button
+        className="text-[#f3eee8]"
+        onClick={() => {
+          history("/config");
+        }}
+      >
+        zz
+      </button>
 
       <select
         className="w-24 bg-[#e5be8f] rounded-md text-sm p-1 text-black"
