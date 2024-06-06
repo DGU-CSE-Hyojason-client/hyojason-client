@@ -75,7 +75,7 @@ export default function Match({ account }: { account: Account }) {
             </div>
           </div>
           <div className="flex flex-col bg-[#f3eee8] p-2 rounded-md gap-2">
-            <div className="text-2xl font-extrabold">내 관심사</div>
+            <div className="text-2xl font-extrabold">그룹 관심사</div>
             <div className="grid grid-cols-2 gap-4 text-center items-center">
               {res?.keyword.map((v: string, i: number) => (
                 <div
