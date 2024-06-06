@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Account } from "../../../types";
 import { getElderGroupStatus, postElderGroupApply } from "../../../apis/match";
+// import MatchResult from "./MatchResult.tsx";
 
 export default function Match({ account }: { account: Account }) {
   const [status, setStatus] = useState<
@@ -42,7 +43,7 @@ export default function Match({ account }: { account: Account }) {
           매칭중입니다...
         </button>
       )}
-      {/* {status === "finish" && <MatchResult match={}/>} */}
+      {/*{status === "finish" && <MatchResult match={} />}*/}
     </div>
   );
 }

@@ -47,11 +47,11 @@ export type GroupDetail = {
   userList: User[];
 };
 
-// export type CaregiverGroupStatusResult = {
-//   groupList: Group[];
-//   users: User[];
-// };
-export type CaregiverGroupStatusResult = Group[];
+export type CaregiverGroupStatusResult = {
+  groupList: Group[];
+  users: User[];
+};
+// export type CaregiverGroupStatusResult = Group[];
 
 export const getCaregiverGroupStatus =
   async (): Promise<CaregiverGroupStatusResult | null> => {
