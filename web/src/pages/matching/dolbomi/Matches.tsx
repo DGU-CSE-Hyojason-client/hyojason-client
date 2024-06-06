@@ -43,14 +43,14 @@ export default function Matches({ account }: { account: Account }) {
           {account.name}: {account.role}
         </span>
 
-        <div className="flex flex-col gap-3 text-slate-200">
+        <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-2 bg-[#f3eee8] rounded-md p-2">
             <span className="text-black">매칭 큐</span>
             <div className="flex gap-2 text-sm flex-wrap">
               {users.map((user) => (
                 <span
                   key={user.id}
-                  className="bg-[#f3eee8] text-center p-1 px-2 rounded-full w-20 text-nowrap"
+                  className="bg-[#e5be8f] text-center p-1 px-2 rounded-full w-20 text-nowrap"
                 >
                   {user.name}
                 </span>
