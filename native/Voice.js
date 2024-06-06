@@ -58,11 +58,6 @@ export default function VoiceModule({ injectJavaScript }) {
     };
   }, []);
 
-  useEffect(() => {
-    // TTS 초기화 및 언어 설정
-    Tts.setDefaultLanguage("ko-KR");
-  }, []);
-
   return (
     <View
       style={{

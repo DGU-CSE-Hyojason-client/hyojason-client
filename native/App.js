@@ -15,6 +15,7 @@ import HomeIcon from "@expo/vector-icons/MaterialCommunityIcons";
 import GroupIcon from "@expo/vector-icons/FontAwesome6";
 import ChatIcon from "@expo/vector-icons/Ionicons";
 import VoiceModule from "./Voice";
+import Tts from "react-native-tts";
 
 const route = [
   { name: "매칭", path: "/matching", Icon: GroupIcon, iconName: "user-group" },
@@ -146,6 +147,11 @@ export default function App() {
     webviewRef.current.postMessage(JSON.stringify({ route }));
   };
 
+  useEffect(() => {
+    // TTS 초기화 및 언어 설정
+    Tts.setDefaultLanguage("ko-KR");
+  }, []);
+
   return (
     <>
       <View style={{ marginTop: __DEV__ ? 30 : 0 }}></View>
@@ -160,8 +166,7 @@ export default function App() {
         javaScriptEnabled={true}
         onMessage={(event) => {
           const { data } = event.nativeEvent;
-          const message = JSON.parse(data);
-          console.log(message);
+          Tts.speak(data);
         }}
       />
       <View

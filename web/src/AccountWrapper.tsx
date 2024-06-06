@@ -27,12 +27,19 @@ export function AccountWrapper({ children }: { children: React.ReactNode }) {
   );
 
   useEffect(() => {
-    const account = MOCK_NORMAL;
+    let ac: Account;
+    let local = localStorage.getItem("ac_normal");
 
-    login(account).then(() => {
-      setAccount(account);
+    if (!local) {
+      ac = MOCK_NORMAL;
+    } else {
+      ac = JSON.parse(local);
+    }
+
+    login(ac).then(() => {
+      setAccount(ac);
     });
-  }, [setAccount]);
+  }, [account, setAccount]);
 
   if (!account) {
     return <></>;
