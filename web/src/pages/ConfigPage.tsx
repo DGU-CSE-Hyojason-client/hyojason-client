@@ -44,6 +44,7 @@ export default function ConfigPage() {
             onClick={() => {
               localStorage.setItem("account_normal", JSON.stringify(value));
               alert("변경되었습니다.");
+              location.reload();
             }}
           >
             변경
@@ -64,6 +65,7 @@ export default function ConfigPage() {
             onClick={() => {
               localStorage.setItem("account_admin", JSON.stringify(value));
               alert("변경되었습니다.");
+              location.reload();
             }}
           >
             변경
