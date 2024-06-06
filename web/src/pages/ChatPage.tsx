@@ -77,8 +77,10 @@ export function ChatPage() {
       return;
     }
 
-    //@ts-ignore
-    window.ReactNativeWebView?.postMessage(sentence);
+    if (type === "assistant") {
+      //@ts-ignore
+      window.ReactNativeWebView?.postMessage(sentence);
+    }
 
     setDialogList((before) => {
       const last = before.at(before.length - 1);
