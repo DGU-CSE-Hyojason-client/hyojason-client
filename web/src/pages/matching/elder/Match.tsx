@@ -64,7 +64,7 @@ export default function Match({ account }: { account: Account }) {
               {res?.memberList.map((v: string, i: number) => (
                 <div
                   key={i}
-                  className="flex text-2xl bg-[#fff] p-2 gap-2 rounded-md"
+                  className="flex text-2xl text-center items-center bg-[#fff] p-2 gap-2 rounded-md"
                 >
                   <span>
                     {i % 2 == 0 ? <ElderManIcon /> : <ElderWomanIcon />}
