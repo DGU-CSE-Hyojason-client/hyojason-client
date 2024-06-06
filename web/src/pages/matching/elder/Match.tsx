@@ -57,7 +57,6 @@ export default function Match({ account }: { account: Account }) {
             매칭이 완료되었습니다
           </button>
           <div className="flex flex-col gap-2">
-            {JSON.stringify(res)}
             <div>{res.regionId}</div>
             {/*<div>키워드: {res.keyword.join(" · ")}</div>*/}
           </div>
