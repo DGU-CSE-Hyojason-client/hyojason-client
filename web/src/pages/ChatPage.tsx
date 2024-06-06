@@ -234,7 +234,7 @@ function BotChat({ chat }: { chat: string }) {
         <BotSvg className="w-10 h-10" />
       </div>
       <div className="ml-2 bg-[#fef9f7] rounded-lg p-2">
-        <p className="text-md text-slate-800">{chat}</p>
+        <p className="text-lg text-slate-800">{chat}</p>
       </div>
     </div>
   );
@@ -244,7 +244,7 @@ function UserChat({ chat }: { chat: string }) {
   return (
     <div className="flex items-center justify-end">
       <div className="mr-2 bg-[#fef9f7] rounded-lg p-2">
-        <p className="text-md text-slate-800">{chat}</p>
+        <p className="text-lg text-slate-800">{chat}</p>
       </div>
       <div className="w-10 h-10">
         <ElderSvg className="w-10 h-10" />
