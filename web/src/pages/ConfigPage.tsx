@@ -13,6 +13,12 @@ const accounts_normal: { [key in string]: Account } = {
     name: "user2",
     role: ROLE.NORMAL,
   },
+  user201: {
+    id: "user201",
+    password: "1234",
+    name: "user201",
+    role: ROLE.NORMAL,
+  },
 };
 
 const accounts_admin: { [key in string]: Account } = {

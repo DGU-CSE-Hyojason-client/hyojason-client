@@ -23,6 +23,8 @@ export function ChatPage() {
   const [dialogList, setDialogList] = useState<Dialog[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const [diagloSentences, setDialogSentences] = useState<string[]>([]);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const history = useNavigate();
 
@@ -73,6 +75,7 @@ export function ChatPage() {
 
   function pushDialog(sentence: string, type: "assistant" | "user") {
     if (sentence.includes("**")) {
+      setDialogSentences(sentence.split("**"));
       onOpen();
       return;
     }
@@ -201,9 +204,9 @@ export function ChatPage() {
         <ModalContent>
           {/* @ts-ignore */}
           <ModalBody className="bg-[#fff] rounded-t-md text-center">
-            <p>그룹핑 서비스를 이용하시겠어요?</p>
-            <p>비슷한 관심사를 가진 분들을 </p>
-            <p>만날 수 있겠네요!</p>
+            {diagloSentences.map((sentence, index) => (
+              <p key={index}>{sentence}</p>
+            ))}
           </ModalBody>
           {/* @ts-ignore */}
           <ModalFooter className="bg-[#fff] rounded-b-md">
