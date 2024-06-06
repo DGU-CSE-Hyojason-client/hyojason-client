@@ -17,7 +17,7 @@ export function HomePage() {
         </div>
         <div className="flex flex-col bg-[#f3eee8] p-4 rounded-md gap-4">
           <div className="text-2xl font-extrabold bg-[#fff] p-2">
-            키워드: 골프, 수영
+            키워드: 그림, 배드민턴
           </div>
           <div className="grid grid-cols-2 gap-4 text-center items-center">
             <div className="flex flex-col text-lg bg-[#fff] p-4 gap-2">
