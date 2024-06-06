@@ -23,7 +23,12 @@ export default function Header() {
         ac = MOCK_NORMAL;
       }
     } else {
-      ac = MOCK_ADMIN;
+      const local = localStorage.getItem("account_admin");
+      if (local) {
+        ac = JSON.parse(local);
+      } else {
+        ac = MOCK_ADMIN;
+      }
     }
 
     login(ac).then(async () => {
