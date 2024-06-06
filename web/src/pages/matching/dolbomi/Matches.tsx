@@ -83,7 +83,7 @@ export default function Matches({ account }: { account: Account }) {
                     </span>
                   ))}
                 </div>
-                {keywordsList.join(" · ")}
+                <span className="text-xs">{keywordsList.join(" · ")}</span>
               </div>
             ))}
           </div>
