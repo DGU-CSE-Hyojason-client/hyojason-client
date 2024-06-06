@@ -43,7 +43,7 @@ export default function Match({ account }: { account: Account }) {
       {status === "ongoing" && (
         <>
           <button className="bg-[#f3eee8] rounded-md p-2 px-1">
-            매칭중입니다...
+            그룹 형성 중입니다..
           </button>
           <div className="flex flex-col gap-2">
             <div>{res.regionId}</div>

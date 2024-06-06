@@ -45,7 +45,7 @@ export default function Matches({ account }: { account: Account }) {
 
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-2 bg-[#f3eee8] rounded-md p-2">
-            <span className="text-black">매칭 큐</span>
+            <span className="text-black">그룹 형성 대기 사용자</span>
             <div className="flex gap-2 text-sm flex-wrap">
               {users.map((user) => (
                 <span
@@ -58,7 +58,7 @@ export default function Matches({ account }: { account: Account }) {
             </div>
           </div>
           <div className="flex flex-col bg-[#f3eee8] p-2 rounded-md gap-2">
-            <span className="text-black">매칭 완료 그룹</span>
+            <span className="text-black">그룹 형성 완료 사용자</span>
             {groupList.map(({ groupId, keywordsList, users }) => (
               <div
                 className="bg-[#e5be8f] rounded-md p-2 flex justify-between text-black"
@@ -100,7 +100,7 @@ export default function Matches({ account }: { account: Account }) {
         <div>인원: {selectedGroup.memberNum}</div>
       </div>
       <div className="flex flex-col gap-2 bg-[#f3eee8] rounded-md p-2">
-        <div>매칭된 사용자</div>
+        <div>사용자</div>
         <div className="flex flex-col bg-[#f3eee8] p-2 rounded-md gap-2">
           {groupDetail?.userList.map((user) => (
             <div
@@ -114,6 +114,7 @@ export default function Matches({ account }: { account: Account }) {
           ))}
         </div>
       </div>
+      <button className="bg-[#f3eee8] rounded-md p-2 px-1">선택</button>
       <button
         className="bg-[#f3eee8] rounded-md p-2 px-1"
         onClick={() => setSelectedGroup(null)}
