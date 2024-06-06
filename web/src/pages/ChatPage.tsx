@@ -125,7 +125,7 @@ export function ChatPage() {
         .catch((e) => {
           alert(e);
         });
-    }, 10000);
+    }, 1000 * 25);
 
     return () => clearTimeout(t);
   }, [chatCount, inputValue]);
