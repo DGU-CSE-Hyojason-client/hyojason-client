@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Account } from "../../../types";
-import { getElderGroupStatus, postElderGroupApply } from "../../../apis/match";
+import { getElderGroupStatus, getElderGroupApply } from "../../../apis/match";
 // import MatchResult from "./MatchResult.tsx";
 
 export default function Match({ account }: { account: Account }) {
@@ -33,7 +33,7 @@ export default function Match({ account }: { account: Account }) {
         <button
           className="bg-[#f3eee8] rounded-md p-2 px-1"
           onClick={async () => {
-            await postElderGroupApply();
+            await getElderGroupApply();
             setStatus("ongoing");
           }}
         >

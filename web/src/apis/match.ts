@@ -74,10 +74,10 @@ export const getCaregiverGroupStatus =
     }
   };
 
-export const postElderGroupApply = async () => {
+export const getElderGroupApply = async () => {
   try {
     const res = await requester(
-      "post",
+      "get",
       apiUrl() + matchUri.postElderGroupApply,
       {}
     );
