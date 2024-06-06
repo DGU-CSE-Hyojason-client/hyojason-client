@@ -49,7 +49,6 @@ export default function Match({ account }: { account: Account }) {
           </button>
           <div className="flex flex-col gap-2 text-lg">
             <div>{res.regionId}</div>
-            <div>유저 수: {res.applicant}</div>
           </div>
         </>
       )}
