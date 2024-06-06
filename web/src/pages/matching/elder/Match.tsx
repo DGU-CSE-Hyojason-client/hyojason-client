@@ -37,7 +37,7 @@ export default function Match({ account }: { account: Account }) {
             setStatus("ongoing");
           }}
         >
-          매칭
+          그룹 요청하기
         </button>
       )}
       {status === "ongoing" && (
@@ -54,7 +54,7 @@ export default function Match({ account }: { account: Account }) {
       {status === "finish" && (
         <>
           <button className="bg-[#f3eee8] rounded-md p-2 px-1">
-            매칭이 완료되었습니다
+            나의 그룹
           </button>
           <div className="flex flex-col gap-2">
             <div>{res.regionId}</div>
