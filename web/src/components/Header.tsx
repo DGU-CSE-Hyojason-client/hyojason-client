@@ -38,7 +38,12 @@ export default function Header() {
 
   return (
     <div className="flex items-center justify-between bg-[#F3EEE8] p-3 font-extralight text-3xl">
-      <div className="flex gap-1 items-center">
+      <div
+        className="flex gap-1 items-center"
+        onClick={() => {
+          location.href = "/";
+        }}
+      >
         <img src="logo.png" className="w-14 h-14 mr-2" />
       </div>
 
