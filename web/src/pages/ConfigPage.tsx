@@ -27,6 +27,12 @@ const accounts_normal: { [key in string]: Account } = {
     name: "user203",
     role: ROLE.NORMAL,
   },
+  user1000: {
+    id: "user1000",
+    password: "1234",
+    name: "user1000",
+    role: ROLE.NORMAL,
+  },
 };
 
 const accounts_admin: { [key in string]: Account } = {
