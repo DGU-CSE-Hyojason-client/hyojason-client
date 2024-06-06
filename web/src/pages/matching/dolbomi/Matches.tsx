@@ -50,7 +50,7 @@ export default function Matches({ account }: { account: Account }) {
               {users.map((user) => (
                 <span
                   key={user.id}
-                  className="bg-slate-700 text-center p-1 px-2 rounded-full w-20 text-nowrap"
+                  className="bg-[#f3eee8] text-center p-1 px-2 rounded-full w-20 text-nowrap"
                 >
                   {user.name}
                 </span>
