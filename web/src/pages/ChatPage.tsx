@@ -193,7 +193,7 @@ export function ChatPage() {
       <Modal
         size="xs"
         isCentered
-        isOpen={isOpen}
+        isOpen={true}
         onClose={onClose}
         scrollBehavior="inside"
       >
@@ -210,14 +210,14 @@ export function ChatPage() {
             {/* @ts-ignore */}
             <Button
               mr={3}
-              colorScheme="blue"
+              backgroundColor="#e5be8f"
               onClick={() => {
                 history("/matching");
               }}
             >
               네
             </Button>
-            <Button onClick={onClose} colorScheme="gray">
+            <Button onClick={onClose} backgroundColor="#f3eee8">
               아니요
             </Button>
           </ModalFooter>

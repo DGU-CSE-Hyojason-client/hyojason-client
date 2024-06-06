@@ -85,6 +85,7 @@ export default function VoiceModule({ injectJavaScript }) {
               padding: 8,
               backgroundColor: "#f3eee8",
               fontSize: 20,
+              borderRadius: 8,
             }}
             onChangeText={(text) => setResult(text)}
           />
@@ -103,23 +104,24 @@ export default function VoiceModule({ injectJavaScript }) {
             지우기
           </Text>
         </TouchableOpacity>
-        <View style={{ padding: 10 }}>
-          <Button
-            title="보내기"
-            onPress={() => {
-              injectJavaScript(result);
-              clear();
+        <TouchableOpacity
+          onPress={() => {
+            injectJavaScript(result);
+            clear();
+          }}
+        >
+          <Text
+            style={{
+              backgroundColor: "#e5be8f",
+              color: "white",
+              padding: 8,
+              borderRadius: 20,
+              fontSize: 20,
             }}
-          />
-        </View>
-        <View>
-          <Button
-            title="tts"
-            onPress={() => {
-              Tts.speak("안녕하세요");
-            }}
-          />
-        </View>
+          >
+            보내기
+          </Text>
+        </TouchableOpacity>
       </SafeAreaView>
       <View>
         <TouchableOpacity

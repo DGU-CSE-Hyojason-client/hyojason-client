@@ -21,7 +21,7 @@ const route = [
   { name: "매칭", path: "/matching", Icon: GroupIcon, iconName: "user-group" },
   { name: "홈", path: "/", Icon: HomeIcon, iconName: "home-variant" },
   {
-    name: "채팅",
+    name: "대화",
     path: "/chat",
     Icon: ChatIcon,
     iconName: "chatbubble-ellipses",
@@ -147,10 +147,10 @@ export default function App() {
     webviewRef.current.postMessage(JSON.stringify({ route }));
   };
 
-  useEffect(() => {
-    // TTS 초기화 및 언어 설정
-    Tts.setDefaultLanguage("ko-KR");
-  }, []);
+  // useEffect(() => {
+  //   // TTS 초기화 및 언어 설정
+  //   Tts.setDefaultLanguage("ko-KR");
+  // }, []);
 
   return (
     <>
