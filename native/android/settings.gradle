@@ -1,4 +1,4 @@
-rootProject.name = 'hyojason_client'
+rootProject.name = '효자손'
 
 dependencyResolutionManagement {
   versionCatalogs {

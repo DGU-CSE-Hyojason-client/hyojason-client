@@ -128,7 +128,7 @@ export default function VoiceModule({ injectJavaScript }) {
           {isLoading ? (
             <FontAwesome
               style={{
-                backgroundColor: "#1E293B",
+                backgroundColor: "#e5be8f",
                 paddingHorizontal: 28,
                 paddingVertical: 19,
                 borderRadius: 50,
@@ -141,7 +141,7 @@ export default function VoiceModule({ injectJavaScript }) {
           ) : (
             <MicIcon
               style={{
-                backgroundColor: "#1E293B",
+                backgroundColor: "#e5be8f",
                 paddingHorizontal: 16,
                 paddingVertical: 8,
                 borderRadius: 50,

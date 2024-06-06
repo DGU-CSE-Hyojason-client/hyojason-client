@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "효자손",
+    "displayName": "효자손",
     "slug": "native",
     "version": "1.0.0",
     "orientation": "portrait",

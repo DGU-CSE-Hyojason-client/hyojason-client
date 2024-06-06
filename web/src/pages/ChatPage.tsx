@@ -12,6 +12,7 @@ import {
   ModalFooter,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const initialText = "Initial Text";
 
@@ -23,6 +24,7 @@ export function ChatPage() {
   const [loading, setLoading] = useState(true);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const history = useNavigate();
 
   const chatBoxRef = useRef<HTMLDivElement>(null);
 
@@ -174,7 +176,7 @@ export function ChatPage() {
                     chatBoxRef.current.scrollTop =
                       chatBoxRef.current.scrollHeight;
                   }}
-                  className="w-[90%] left-[5%] top-[470px] absolute text-center text-sm rounded-lg bg-[#a39e98] p-1"
+                  className="w-[90%] left-[5%] top-[470px] absolute text-center text-sm rounded-lg bg-[#e5be8f] p-1"
                 >
                   ᐯ
                 </div>
@@ -186,26 +188,26 @@ export function ChatPage() {
       <Modal
         size="xs"
         isCentered
-        isOpen={isOpen}
+        isOpen={true}
         onClose={onClose}
         scrollBehavior="inside"
       >
         {/* @ts-ignore */}
         <ModalContent>
           {/* @ts-ignore */}
-          <ModalBody className="bg-slate-300 rounded-t-md text-center">
+          <ModalBody className="bg-[#fff] rounded-t-md text-center">
             <p>그룹핑 서비스를 이용하시겠어요?</p>
             <p>비슷한 관심사를 가진 분들을 </p>
             <p>만날 수 있겠네요!</p>
           </ModalBody>
           {/* @ts-ignore */}
-          <ModalFooter className="bg-slate-300 rounded-b-md">
+          <ModalFooter className="bg-[#fff] rounded-b-md">
             {/* @ts-ignore */}
             <Button
               mr={3}
               colorScheme="blue"
               onClick={() => {
-                location.href = "/matching";
+                history("/matching");
               }}
             >
               네
