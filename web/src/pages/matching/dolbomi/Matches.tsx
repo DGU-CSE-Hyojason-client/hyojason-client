@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Account, User } from "../../../types";
+import { Account } from "../../../types";
 import {
   Group,
   GroupDetail,
@@ -8,7 +8,7 @@ import {
 
 export default function Matches({ account }: { account: Account }) {
   const [groupList, setGroupList] = useState<Group[]>([]);
-  const [users, setUsers] = useState<User[]>([]);
+  // const [users, setUsers] = useState<User[]>([]);
   const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
   const [groupDetail, setGroupDetail] = useState<GroupDetail | null>(null);
 
@@ -17,7 +17,7 @@ export default function Matches({ account }: { account: Account }) {
       if (data) {
         console.log(data);
         setGroupList(data.groupList);
-        setUsers(data.users);
+        // setUsers(data.users);
       }
     });
   }, []);
@@ -44,19 +44,19 @@ export default function Matches({ account }: { account: Account }) {
         </span>
 
         <div className="flex flex-col gap-3">
-          <div className="flex flex-col gap-2 bg-[#f3eee8] rounded-md p-2">
-            <span className="text-black">그룹 형성 대기 사용자</span>
-            <div className="flex gap-2 text-sm flex-wrap">
-              {users.map((user) => (
-                <span
-                  key={user.id}
-                  className="bg-[#e5be8f] text-center p-1 px-2 rounded-full w-20 text-nowrap"
-                >
-                  {user.name}
-                </span>
-              ))}
-            </div>
-          </div>
+          {/*<div className="flex flex-col gap-2 bg-[#f3eee8] rounded-md p-2">*/}
+          {/*  <span className="text-black">그룹 형성 대기 사용자</span>*/}
+          {/*  <div className="flex gap-2 text-sm flex-wrap">*/}
+          {/*    {users.map((user) => (*/}
+          {/*      <span*/}
+          {/*        key={user.id}*/}
+          {/*        className="bg-[#e5be8f] text-center p-1 px-2 rounded-full w-20 text-nowrap"*/}
+          {/*      >*/}
+          {/*        {user.name}*/}
+          {/*      </span>*/}
+          {/*    ))}*/}
+          {/*  </div>*/}
+          {/*</div>*/}
           <div className="flex flex-col bg-[#f3eee8] p-2 rounded-md gap-2">
             <span className="text-black">그룹 형성 완료 사용자</span>
             {groupList.map(({ groupId, keywordsList, users }) => (
