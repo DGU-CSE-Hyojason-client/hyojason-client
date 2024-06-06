@@ -35,9 +35,10 @@ export default function ConfigPage() {
           <div>{value.role}</div>
           <div
             className="bg-amber-200 rounded-md px-1"
-            onClick={() =>
-              localStorage.setItem("account_normal", JSON.stringify(value))
-            }
+            onClick={() => {
+              localStorage.setItem("account_normal", JSON.stringify(value));
+              alert("변경되었습니다.");
+            }}
           >
             변경
           </div>
@@ -54,9 +55,10 @@ export default function ConfigPage() {
           <div>{value.role}</div>
           <div
             className="bg-amber-200 rounded-md px-1"
-            onClick={() =>
-              localStorage.setItem("account_admin", JSON.stringify(value))
-            }
+            onClick={() => {
+              localStorage.setItem("account_admin", JSON.stringify(value));
+              alert("변경되었습니다.");
+            }}
           >
             변경
           </div>
