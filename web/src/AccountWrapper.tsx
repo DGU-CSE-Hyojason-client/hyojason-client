@@ -36,6 +36,10 @@ export function AccountWrapper({ children }: { children: React.ReactNode }) {
       ac = JSON.parse(local);
     }
 
+    if (account?.id === ac.id) {
+      return;
+    }
+
     login(ac).then(() => {
       setAccount(ac);
     });
