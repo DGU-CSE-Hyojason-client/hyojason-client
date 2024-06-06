@@ -45,8 +45,9 @@ export default function Match({ account }: { account: Account }) {
           <button className="bg-[#f3eee8] rounded-md p-2 px-1">
             매칭중입니다...
           </button>
-          <div>
-            <div>{JSON.stringify(res)}</div>
+          <div className="flex flex-col gap-2">
+            <div>{res.regionId}</div>
+            <div>유저 수: {res.applicant}</div>
           </div>
         </>
       )}
