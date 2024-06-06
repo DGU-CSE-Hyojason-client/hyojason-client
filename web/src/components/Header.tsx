@@ -31,10 +31,14 @@ export default function Header() {
       }
     }
 
+    if (account.id === ac.id) {
+      return;
+    }
+
     login(ac).then(async () => {
       setAccount(ac);
     });
-  }, [id, name, role, setAccount]);
+  }, [account, id, name, role, setAccount]);
 
   return (
     <div className="flex items-center justify-between bg-[#F3EEE8] p-3 font-extralight text-3xl">

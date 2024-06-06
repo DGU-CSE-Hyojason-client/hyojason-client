@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import MicIcon from "@expo/vector-icons/MaterialIcons";
 import { FontAwesome } from "@expo/vector-icons";
+import Tts from "react-native-tts";
+
 import {
   View,
   Text,
@@ -56,6 +58,11 @@ export default function VoiceModule({ injectJavaScript }) {
     };
   }, []);
 
+  useEffect(() => {
+    // TTS 초기화 및 언어 설정
+    Tts.setDefaultLanguage("ko-KR");
+  }, []);
+
   return (
     <View
       style={{
@@ -107,6 +114,14 @@ export default function VoiceModule({ injectJavaScript }) {
             onPress={() => {
               injectJavaScript(result);
               clear();
+            }}
+          />
+        </View>
+        <View>
+          <Button
+            title="tts"
+            onPress={() => {
+              Tts.speak("안녕하세요");
             }}
           />
         </View>
