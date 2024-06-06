@@ -3,7 +3,7 @@ import { HomePage } from "./pages/HomePage";
 import { ChatPage } from "./pages/ChatPage";
 import { Layout } from "./pages/Layout";
 import { MatchingPage } from "./pages/MatchingPage";
-import { AccountWrapper } from "./AccountWrapper";
+// import { AccountWrapper } from "./AccountWrapper";
 import ConfigPage from "./pages/ConfigPage.tsx";
 
 const router = createBrowserRouter([
@@ -11,9 +11,9 @@ const router = createBrowserRouter([
     // 인증필요
     path: "/",
     element: (
-      <AccountWrapper>
-        <Layout />
-      </AccountWrapper>
+      // <AccountWrapper>
+      <Layout />
+      // </AccountWrapper>
     ),
     children: [
       { index: true, element: <HomePage /> },

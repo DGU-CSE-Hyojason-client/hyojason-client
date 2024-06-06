@@ -5,7 +5,7 @@ import { login } from "./apis/account";
 import { Account, ROLE } from "./types";
 
 export const MOCK_NORMAL: Account = {
-  id: "user2002",
+  id: "user1",
   password: "1234",
   name: "효자손",
   role: ROLE.NORMAL,
@@ -18,6 +18,9 @@ export const MOCK_ADMIN: Account = {
   role: ROLE.ADMIN,
 };
 
+localStorage.setItem("account_normal", JSON.stringify(MOCK_NORMAL));
+localStorage.setItem("account_admin", JSON.stringify(MOCK_ADMIN));
+
 export function AccountWrapper({ children }: { children: React.ReactNode }) {
   const { account, setAccount } = useAccountStore(
     useShallow((state) => ({
@@ -27,23 +30,12 @@ export function AccountWrapper({ children }: { children: React.ReactNode }) {
   );
 
   useEffect(() => {
-    let ac: Account;
-    let local = localStorage.getItem("ac_normal");
+    const account = MOCK_NORMAL;
 
-    if (!local) {
-      ac = MOCK_NORMAL;
-    } else {
-      ac = JSON.parse(local);
-    }
-
-    if (account?.id === ac.id) {
-      return;
-    }
-
-    login(ac).then(() => {
-      setAccount(ac);
+    login(account).then(() => {
+      setAccount(account);
     });
-  }, [account, setAccount]);
+  }, [setAccount]);
 
   if (!account) {
     return <></>;
