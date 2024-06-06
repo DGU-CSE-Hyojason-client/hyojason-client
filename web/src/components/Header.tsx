@@ -34,7 +34,7 @@ export default function Header() {
     login(ac).then(async () => {
       setAccount(ac);
     });
-  }, [account, id, name, role, setAccount]);
+  }, [id, name, role, setAccount]);
 
   return (
     <div className="flex items-center justify-between bg-[#F3EEE8] p-3 font-extralight text-3xl">
