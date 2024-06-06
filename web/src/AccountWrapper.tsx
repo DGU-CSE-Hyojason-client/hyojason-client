@@ -18,9 +18,6 @@ export const MOCK_ADMIN: Account = {
   role: ROLE.ADMIN,
 };
 
-localStorage.setItem("account_normal", JSON.stringify(MOCK_NORMAL));
-localStorage.setItem("account_admin", JSON.stringify(MOCK_ADMIN));
-
 export function AccountWrapper({ children }: { children: React.ReactNode }) {
   const { account, setAccount } = useAccountStore(
     useShallow((state) => ({
