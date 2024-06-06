@@ -188,7 +188,7 @@ export function ChatPage() {
       <Modal
         size="xs"
         isCentered
-        isOpen={true}
+        isOpen={isOpen}
         onClose={onClose}
         scrollBehavior="inside"
       >
